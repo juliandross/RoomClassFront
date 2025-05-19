@@ -1,0 +1,9 @@
+body{
+    font-family: "Ubuntu", sans-serif;
+}
+.btn-primary{ 
+    background-color: rgb(38, 106, 161);
+}
+.btn-primary:hover{
+    background-color: rgb(31, 89, 136);
+}
