@@ -46,18 +46,19 @@ export class LoginComponent {
         icon: 'success',
         confirmButtonText: 'OK'
       }).then(() => {
-      // Redirect to the dashboard or another page
-      //this.router.navigate(['/dashboard']);
+        this.authService.getProfile().subscribe(() => {
+        this.router.navigate(['/home']);
+      });      
     }); 
     },
-    error: () => {
+    error: (er) => {
       Swal.fire({
         title: 'Error',
         text: 'Credenciales incorrectas',
         icon: 'error',
         confirmButtonText: 'OK'
-      });
-      console.log('Login failed', this.loginForm.value);
+      });      
+      console.log('Login failed');
       this.loginForm.reset();
     }
   });             

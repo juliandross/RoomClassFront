@@ -1,0 +1,21 @@
+.siderbar-container{
+    background-color: var(--secondary-color);
+    height: 100vh;
+}
+i{
+    color: white;
+    font-size: 80px;
+}
+a{
+    font-size: 30px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+a:hover{
+    transform: scale(1.1);
+    color: white;
+}
+.dropdown-toggle{
+    font-size: 20px;
+}

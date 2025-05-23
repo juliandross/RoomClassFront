@@ -1,0 +1,20 @@
+<div class="siderbar-container w-100 border radious" >
+    <div class="user-info d-flex flex-column align-items-center my-5">
+        <h2>RoomClass</h2>
+        <i class="fa-solid fa-circle-user"></i>
+        <div class="mt-3 d-flex">
+            <h3>{{user?.name}}</h3>
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="button" (click)="logout()">Cerrar sesión</button></li>                
+            </ul>
+        </div>
+        <h4>{{user?.role}}</h4>        
+    </div>
+    <div class="links d-flex flex-column align-items-center border-top py-3 ">        
+        <a class="link" [routerLink]="'/home/programa'" routerLinkActive="active">Programa</a>
+        <a class="link" [routerLink]="'/home/asignaturas'" routerLinkActive="active">Asignaturas</a>
+        <a class="link" [routerLink]="'/home/docentes'" routerLinkActive="active">Docentes</a>        
+    </div>
+
+</div>
