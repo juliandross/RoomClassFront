@@ -2,7 +2,7 @@
     background-color: var(--third-color);
     height: 15%;    
 }
-p{
+a,span{
     font-size: 30px;
     font-weight: bold;   
 }

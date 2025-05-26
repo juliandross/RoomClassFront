@@ -13,3 +13,28 @@ body{
     --secondary-color: rgb(74, 174, 255);    
     --third-color: rgb(179, 179, 179);
 }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; 
+}
+
+.siderbar {  
+  flex-shrink: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+app-header {  
+  flex-shrink: 0;
+}
+
+main {
+  overflow-y: auto;
+  overflow-x: hidden;
+}

@@ -11,12 +11,25 @@ export const routes: Routes = [
     {
         path: 'home',
         component: LayoutComponent,
-        canActivate: [authGuard],
+        canActivate: [authGuard],        
+        data: { breadcrumb: 'Home' },
         children: [
-            { path: '', loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) },
-            { path: 'asignaturas', loadComponent: () => import('./features/asignaturas/asignaturas.component').then(m => m.AsignaturasComponent) },
-            { path: 'docentes', loadComponent: () => import('./features/docentes/docentes.component').then(m => m.DocentesComponent) },
-            { path: 'programa', loadComponent: () => import('./features/programa/programa.component').then(m => m.ProgramaComponent) },
+            { path: '', 
+                loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) ,
+                data: { breadcrumb: null },
+            },
+            { path: 'asignaturas', 
+                loadComponent: () => import('./features/subjects/subject.component').then(m => m.SubjectComponent), 
+                data: { breadcrumb: 'Asignaturas' }
+            },                
+            { path: 'docentes',
+                loadComponent: () => import('./features/docentes/docentes.component').then(m => m.DocentesComponent), 
+                data: { breadcrumb: 'Docentes' }
+            },
+            { path: 'programa', 
+                loadComponent: () => import('./features/programa/programa.component').then(m => m.ProgramaComponent), 
+                data: { breadcrumb: 'Programa' }
+            },
         ]
     },
 ];

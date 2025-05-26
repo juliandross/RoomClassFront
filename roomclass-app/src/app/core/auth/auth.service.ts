@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { delay, Observable, of, tap } from 'rxjs';
-
-export interface User{
-  name: string;
-  email: string;  
-  role: string;
-}
+import { User } from '../models/user'; // Asegúrate de que la ruta sea correcta
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -18,19 +13,18 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     console.log('Login called with:', email, password);
-    return this.http.post<{ token: string }>(`${this.apiUrl}/token/`, { email, password }).pipe(
+    /*return this.http.post<{ token: string }>(`${this.apiUrl}/token/`, { email, password }).pipe(
+      tap(response => {
+        sessionStorage.setItem('token', response.token);
+      })
+    );*/
+    // Simulación de un login exitoso
+    const fakeToken = 'fake-jwt-token';
+    return of({ token: fakeToken }).pipe(      
       tap(response => {
         sessionStorage.setItem('token', response.token);
       })
     );
-    // Simulación de un login exitoso
-    /*const fakeToken = 'fake-jwt-token';
-    return of({ token: fakeToken }).pipe(
-      delay(1000), // simula una pequeña espera
-      tap(response => {
-        localStorage.setItem('token', response.token);
-      })
-    );*/
   }
 
   logout() {
