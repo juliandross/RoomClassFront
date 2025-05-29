@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { delay, Observable, of, tap } from 'rxjs';
 import { User } from '../models/user'; // Asegúrate de que la ruta sea correcta
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api'; 
+  private apiUrl = 'http://localhost:8000'; 
   private user: User | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<any> {
     console.log('Login called with:', email, password);
-    /*return this.http.post<{ token: string }>(`${this.apiUrl}/token/`, { email, password }).pipe(
+    return this.http.post<{access: string; refresh: string}>(`${this.apiUrl}/api/token/`, { email, password }).pipe(
       tap(response => {
-        sessionStorage.setItem('token', response.token);
+        sessionStorage.setItem('token', response.access);
+        console.log('Token stored in sessionStorage:', response.access);
       })
-    );*/
+    );
     // Simulación de un login exitoso
-    const fakeToken = 'fake-jwt-token';
+    /*const fakeToken = 'fake-jwt-token';
     return of({ token: fakeToken }).pipe(      
       tap(response => {
         sessionStorage.setItem('token', response.token);
       })
-    );
+    );*/
   }
 
   logout() {
@@ -36,7 +37,7 @@ export class AuthService {
 
   getToken(): string | null {
   if (typeof window !== 'undefined' && window.localStorage) {
-    return sessionStorage.getItem('token');
+    return sessionStorage.getItem('token'); // Obtener el token del sessionStorage
   }
   return null;
   }
@@ -44,24 +45,35 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken(); // Si hay token, el usuario está "autenticado"
   }
+  //Se debe hacer un método para obtener el perfil del usuario por medio de su email
   getProfile(): Observable<User> {
-    /*return this.http.get<User>(`${this.apiUrl}/usuario`).pipe(
-      tap(perfil => this.user = perfil) // Guarda en caché local
-    );*/
+    const token = this.getToken();    
+    let headers = new HttpHeaders; // Usar el objeto HttpHeaders de Angular
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }    
+    console.log('Obteniendo perfil del usuario con token:', token);
+    return this.http.get<User>(`${this.apiUrl}/users/1/`, { headers }).pipe(
+      tap(perfil => {
+        this.user = perfil;
+        console.log('Perfil del usuario obtenido:', perfil);
+        })
+      );
+  }
     // Simulación de una llamada a la API para obtener el perfil del usuario
-    return of({
+    /*return of({
       name: 'John Doe',
       email: 'john@gmail.com',
       role: 'admin'
     }).pipe(
       delay(1000), // simula una pequeña espera
       tap(perfil => this.user = perfil) // Guarda en caché local
-    );    
-  }
+    );*/    
+  
   getUser(): User | null {
     return this.user;
   }
   getUserRole(): string | null {
-    return this.user ? this.user.role : null;
+    return this.user ? this.user.rol : null;
   }
 }

@@ -1,7 +1,7 @@
 export interface Subject {
-    id: number;
-    name: string;
-    description: string;
-    credits: number;
-    semester: number;
+    subjectName :string;
+    subjectDescription :string;
+    subjectCredits :number;
+    subjectSemester :number;
+    is_active :boolean;
 }

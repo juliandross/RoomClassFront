@@ -45,7 +45,7 @@ export class LoginComponent {
         text: 'Bienvenido de vuelta!',
         icon: 'success',
         confirmButtonText: 'OK'
-      }).then(() => {
+      }).then(() => {        
         this.authService.getProfile().subscribe(() => {
         this.router.navigate(['/home']);
       });      
