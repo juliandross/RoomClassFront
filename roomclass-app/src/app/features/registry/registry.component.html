@@ -1,0 +1,31 @@
+<div class="registry-bg d-flex justify-content-center align-items-center min-vh-100">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="registry-form p-4 border rounded shadow bg-white">
+    <h2 class="text-center mb-4">RoomClass</h2>
+    <div class="mb-3">
+      <input type="email" class="form-control" formControlName="email" placeholder="Correo electrónico" required>
+    </div>
+    <div class="mb-3">
+      <input type="password" class="form-control" formControlName="password" placeholder="Contraseña" required>
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" formControlName="first_name" placeholder="Nombre" required>
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" formControlName="last_name" placeholder="Apellido" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">Registrarse</button>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+  </form>
+</div>
+
+<style>
+.registry-bg {
+  background: #4a7bb7;
+  min-height: 100vh;
+}
+.registry-form {
+  width: 100%;
+  max-width: 350px;
+}
+</style>
