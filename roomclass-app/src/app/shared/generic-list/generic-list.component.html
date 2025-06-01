@@ -1,0 +1,30 @@
+<div class="item-container w-100 h-100 p-5 d-flex align-items-center flex-column">
+    <input type="text" class="form-control w-50" placeholder="Buscar {{name}}">
+    <div *ngIf="items?.length == 0" class="alert alert-info mt-3">
+      No hay registros en la base de datos
+    </div>
+    <div class="w-75 mt-3">
+        <ul class="list-group" *ngIf="items.length > 0">
+        <li *ngFor="let item of items" class="list-group-item border rounded d-flex my-2 justify-content-between align-items-center">
+            <div class="item-info">
+                <h5>{{ item[nameAtribute] }}</h5>                
+            </div>
+            <div class="subject-actions d-flex">
+                <button name="Mostrar {{name}}" class="btn btn-primary me-2" *ngIf="showViewButton" (click)="onView.emit(item)">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+                <button name="Editar {{name}}" class="btn btn-secondary me-2" (click)="onEdit.emit(item)">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button name="Eliminar {{name}}" class="btn btn-danger" (click)="onDelete.emit(item)">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>           
+        </li>
+    </ul>
+     <button name="Agregar {{name}}" class="btn btn-success add-btn" (click)="onAdd.emit()">
+        <i class="fa-solid fa-plus"></i>
+     </button>
+    </div>
+    
+</div>

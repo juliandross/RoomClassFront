@@ -19,7 +19,7 @@ export class LoginComponent {
   //Initializes the login form with FormBuilder
   constructor(private fb: FormBuilder,private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -35,9 +35,9 @@ export class LoginComponent {
       });
       return;
     } 
-    const { username, password } = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
     //Here we send the login data to the server
-    this.authService.login(username, password).subscribe({
+    this.authService.login(email, password).subscribe({
     next: () => {
       console.log('Login successful', this.loginForm.value);      
       Swal.fire({

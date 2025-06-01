@@ -1,7 +1,11 @@
 import { defineConfig } from 'vite';
 
+console.log('Vite configuration loaded for roomclass-app');
 export default defineConfig({
   optimizeDeps: {
-    exclude: ['chunk-DKIA5PH4.js','chunk-PIJNHK4Q.js','chunk-FCU77XZZ.js'],
+    exclude: [
+      'sweetalert2',
+      '@sweetalert2/ngx-sweetalert2',
+    ],
   },
 });
