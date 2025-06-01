@@ -8,6 +8,10 @@
             <input type="password" id="password" class="form-control" formControlName="password" placeholder="Contraseña" required>
         </div>
         <button type="submit" class="btn btn-primary w-100 mt-4">Iniciar sesion</button>
+        <div class="mt-3">
+            <a routerLink="/register" class="text-decoration-none">¿No tienes cuenta? Regístrate</a>
+        </div>
+        <button type="button" class="btn btn-secondary w-100 mt-2" (click)="onRegister()">Registrarse</button>
         <hr>        
     </form>
 </div>
