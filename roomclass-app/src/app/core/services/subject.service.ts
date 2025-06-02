@@ -11,56 +11,29 @@ export class SubjectService {
   private apiUrl = 'http://localhost:8001/AcademApi/subject/';
   constructor(private httpClient: HttpClient, private authService: AuthService) {}
 
-  getSubjects(): Observable<Subject[]> {
-    const token = this.authService.getToken(); // Usa el método de AuthService
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-    return this.httpClient.get<Subject[]>(this.apiUrl, { headers });
+  getSubjects(): Observable<Subject[]> {    
+    return this.httpClient.get<Subject[]>(this.apiUrl);
   }
 
-  postSubject(subject: Subject): Observable<Subject> {
-    const token = this.authService.getToken(); // Usa el método de AuthService
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    });
-    return this.httpClient.post<Subject>(this.apiUrl, subject, { headers });
+  postSubject(subject: Subject): Observable<Subject> {    
+    return this.httpClient.post<Subject>(this.apiUrl, subject);
   }
 
-  putSubject(id: Number,subject: Subject): Observable<Subject> {
-    const token = this.authService.getToken(); // Usa el método de AuthService
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    });
-    return this.httpClient.put<Subject>(`${this.apiUrl}${id}`, subject, { headers });
+  putSubject(id: Number,subject: Subject): Observable<Subject> {    
+    return this.httpClient.put<Subject>(`${this.apiUrl}${id}`, subject);
   }
 
   deleteSubject(id: Number, subject: Subject): Observable<void> {
     //Solo desactiva el subject, no lo elimina
-    subject.is_active = false; // Cambia el estado a false para desactivar
-    const token = this.authService.getToken(); // Usa el método de AuthService
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-    return this.httpClient.put<void>(`${this.apiUrl}${id}`, subject,{ headers });
+    subject.is_active = false; // Cambia el estado a false para desactivar   
+    return this.httpClient.put<void>(`${this.apiUrl}${id}`, subject);
   }
 
-  viewSubject(id: Number): Observable<Subject> {
-    const token = this.authService.getToken(); // Usa el método de AuthService
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-    return this.httpClient.get<Subject>(`${this.apiUrl}${id}`, { headers });
+  viewSubject(id: Number): Observable<Subject> {    
+    return this.httpClient.get<Subject>(`${this.apiUrl}${id}`);
   }
 
   editSubject(id: Number, subject: Subject): Observable<Subject> {
-    const token = this.authService.getToken(); // Usa el método de AuthService
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    });
-    return this.httpClient.put<Subject>(`${this.apiUrl}${id}`, subject, { headers });
+    return this.httpClient.put<Subject>(`${this.apiUrl}${id}`, subject);
   }
 }

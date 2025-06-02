@@ -6,6 +6,7 @@ import { User } from '../../core/models/user';
   selector: 'app-home',
   standalone: true,
   imports: [],
+  providers: [AuthService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -15,9 +16,9 @@ export class HomeComponent {
     // This method is called when the component is initialized, it obtains the user credentials
     ngOnInit() {
         this.authService.getProfile().subscribe({
-          next: (user) => {
-            this.user = user;
-          }
-        });
+        next: user => {
+          this.user = user;
+        }
+  });
       }
 }

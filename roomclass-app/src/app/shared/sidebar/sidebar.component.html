@@ -35,10 +35,10 @@
             <i class="fa-solid fa-chalkboard-user fa-sm"></i>
             <span>Docentes</span>
         </a>
-        <a class="link nav-item mb-2" [routerLink]="'/home/asignar-asignaturas'" routerLinkActive="active">
+        <a class="link nav-item mb-2" [routerLink]="'/home/asignar_materia'" routerLinkActive="active">
             <i class="fa-solid fa-book fa-sm"></i>
-            <span *ngIf="isCoordinador">Asignar asignaturas</span>
-            <span *ngIf="!isCoordinador">Mis asignaturas</span>
+            <span *ngIf="isCoordinador">Asignar materias</span>
+            <span *ngIf="!isCoordinador">Mis materias</span>
         </a>
     </div>
     <div class="d-flex flex-column align-items-center mt-0">

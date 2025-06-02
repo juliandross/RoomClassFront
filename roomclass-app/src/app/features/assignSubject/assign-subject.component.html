@@ -1,0 +1,10 @@
+<app-generic-list
+  [name]="'Materias asignadas'"
+  [nameAtribute]="'displayName'"
+  [items]="assignSubjects"
+  [showViewButton]="true"
+  (onAdd)="addAssignSubject()"
+  (onEdit)="editAssignSubject($event)"
+  (onDelete)="deleteAssignSubject($event)"
+  (onView)="viewAssignSubject($event)">
+</app-generic-list>
