@@ -1,7 +1,7 @@
 <div class="siderbar-container w-100 border radious">
     <div class="user-info d-flex flex-column align-items-center my-5">
         <h2>RoomClass</h2>
-        <i class="fa-solid fa-circle-user fa-3x"></i>
+        <i class="fa-solid fa-circle-user fa-2x"></i>
         <div class="mt-3 d-flex align-items-center">
             <h3 class="me-2">{{user?.first_name}} {{user?.last_name}}</h3>
             <div class="dropdown">
@@ -9,12 +9,12 @@
                 <ul class="dropdown-menu">
                     <li>
                         <button class="dropdown-item" type="button" (click)="goToUserManagement()">
-                            <i class="fa-solid fa-user-gear me-2"></i>Gestionar usuario
+                            <i class="fa-solid fa-user-gear me-2 fa-sm"></i>Gestionar usuario
                         </button>
                     </li>
                     <li>
                         <button class="dropdown-item" type="button" (click)="logout()">
-                            <i class="fa-solid fa-right-from-bracket me-2"></i>Cerrar sesión
+                            <i class="fa-solid fa-right-from-bracket me-2 fa-sm"></i>Cerrar sesión
                         </button>
                     </li>
                 </ul>
@@ -24,18 +24,18 @@
     </div>
     <div class="links d-flex flex-column align-items-center border-top py-3">
         <a class="link mb-2" [routerLink]="'/home/programa'" routerLinkActive="active">
-            <i class="fa-solid fa-graduation-cap me-2"></i>Programa
+            <i class="fa-solid fa-graduation-cap me-2 fa-sm"></i>Programa
         </a>
         <a class="link mb-2" [routerLink]="'/home/asignaturas'" routerLinkActive="active">
-            <i class="fa-solid fa-book me-2"></i>Asignaturas
+            <i class="fa-solid fa-book me-2 fa-sm"></i>Asignaturas
         </a>
         <a class="link mb-2" [routerLink]="'/home/docentes'" routerLinkActive="active">
-            <i class="fa-solid fa-chalkboard-user me-2"></i>Docentes
+            <i class="fa-solid fa-chalkboard-user me-2 fa-sm"></i>Docentes
         </a>
     </div>
     <div class="d-flex flex-column align-items-center mt-4">
         <button class="btn btn-danger w-75" (click)="logout()">
-            <i class="fa-solid fa-right-from-bracket me-2"></i>Cerrar sesión
+            <i class="fa-solid fa-right-from-bracket me-2 fa-sm"></i>Cerrar sesión
         </button>
     </div>
 </div>

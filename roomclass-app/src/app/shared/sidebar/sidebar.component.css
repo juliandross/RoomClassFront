@@ -2,10 +2,20 @@
     background-color: var(--secondary-color);
     height: 100vh;
 }
-i{
+
+/* Solo el ícono principal grande */
+.siderbar-container .fa-circle-user {
     color: white;
     font-size: 80px;
 }
+
+/* Íconos pequeños en menú y links */
+.siderbar-container .fa-sm {
+    font-size: 1em !important;
+    color: inherit;
+}
+
+/* Links */
 a{
     font-size: 30px;
     text-decoration: none;
