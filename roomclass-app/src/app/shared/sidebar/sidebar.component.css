@@ -1,31 +1,47 @@
-.siderbar-container{
-    background-color: var(--secondary-color);
-    height: 100vh;
+.siderbar-container {
+  background-color: var(--secondary-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Solo el ícono principal grande */
 .siderbar-container .fa-circle-user {
-    color: white;
-    font-size: 80px;
+  color: white;
+  font-size: 50px;
 }
 
-/* Íconos pequeños en menú y links */
 .siderbar-container .fa-sm {
-    font-size: 1em !important;
-    color: inherit;
+  font-size: 1em !important;
+  color: inherit;
 }
 
-/* Links */
-a{
-    font-size: 30px;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-    color: inherit;
+a {
+  font-size: 30px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
 }
-a:hover{
-    transform: scale(1.1);
-    color: white;
+
+a:hover {
+  transform: scale(1.05);
+  color: white;
 }
-.dropdown-toggle{
-    font-size: 20px;
+
+.dropdown-toggle {
+  font-size: 20px;
+}
+.nav-item {
+  display: flex;
+  align-items: center; 
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.nav-item span {
+  white-space: normal;       
+  word-break: break-word;    
+  line-height: 1.2;          
+  display: inline-block;     
 }

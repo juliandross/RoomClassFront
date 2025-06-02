@@ -22,19 +22,26 @@
         </div>
         <h4>{{user?.rol}}</h4>
     </div>
-    <div class="links d-flex flex-column align-items-center border-top py-3">
-        <a class="link mb-2" [routerLink]="'/home/programa'" routerLinkActive="active">
-            <i class="fa-solid fa-graduation-cap me-2 fa-sm"></i>Programa
+    <div class="links d-flex flex-column align-items-start border-top py-3 px-3">
+        <a class="link nav-item mb-2" [routerLink]="'/home/programa'" routerLinkActive="active">
+            <i class="fa-solid fa-graduation-cap fa-sm"></i>
+            <span>Programa</span>
         </a>
-        <a class="link mb-2" [routerLink]="'/home/asignaturas'" routerLinkActive="active">
-            <i class="fa-solid fa-book me-2 fa-sm"></i>Asignaturas
+        <a class="link nav-item mb-2" [routerLink]="'/home/asignaturas'" routerLinkActive="active">
+            <i class="fa-solid fa-book fa-sm"></i>
+            <span>Asignaturas</span>
         </a>
-        <a class="link mb-2" [routerLink]="'/home/docentes'" routerLinkActive="active">
-            <i class="fa-solid fa-chalkboard-user me-2 fa-sm"></i>Docentes
+        <a class="link nav-item mb-2" [routerLink]="'/home/docentes'" routerLinkActive="active">
+            <i class="fa-solid fa-chalkboard-user fa-sm"></i>
+            <span>Docentes</span>
+        </a>
+        <a *ngIf="isCoordinador" class="link nav-item mb-2" [routerLink]="'/home/asignar-asignaturas'" routerLinkActive="active">
+            <i class="fa-solid fa-user-plus fa-sm"></i>
+            <span>Asignar asignaturas</span>
         </a>
     </div>
-    <div class="d-flex flex-column align-items-center mt-4">
-        <button class="btn btn-danger w-75" (click)="logout()">
+    <div class="d-flex flex-column align-items-center mt-0">
+        <button class="btn btn-danger w-75 mb-5" (click)="logout()">
             <i class="fa-solid fa-right-from-bracket me-2 fa-sm"></i>Cerrar sesión
         </button>
     </div>
