@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,HttpClientModule],  
+  imports: [ReactiveFormsModule],  
   providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -46,9 +46,11 @@ export class LoginComponent {
         icon: 'success',
         confirmButtonText: 'OK'
       }).then(() => {        
-        this.authService.getProfile().subscribe(() => {
-        this.router.navigate(['/home']);
-      });      
+        this.authService.getProfile().subscribe({
+          next:(user)=>{
+            this.router.navigate(['/home']);
+          }
+        });      
     }); 
     },
     error: (er) => {

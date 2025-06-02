@@ -7,6 +7,7 @@ import { AssignSubjectService } from '../../core/services/assign-subject.service
   selector: 'app-assign-subject',
   standalone: true,
   imports: [GenericListComponent],
+  providers: [AssignSubjectService],
   templateUrl: './assign-subject.component.html',
   styleUrl: './assign-subject.component.css'
 })
