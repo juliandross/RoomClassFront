@@ -1,1 +1,27 @@
-<p>subject-create-dialog works!</p>
+<h2>Crear Asignatura</h2>
+<form #subjectForm="ngForm">
+  <div>
+    <label>Nombre:</label>
+    <input name="subjectName" [(ngModel)]="subject.subjectName" required />
+  </div>
+  <div>
+    <label>Descripción:</label>
+    <textarea name="subjectDescription" [(ngModel)]="subject.subjectDescription" required></textarea>
+  </div>
+  <div>
+    <label>Créditos:</label>
+    <input type="number" name="subjectCredits" [(ngModel)]="subject.subjectCredits" required min="1" />
+  </div>
+  <div>
+    <label>Semestre:</label>
+    <input type="number" name="subjectSemester" [(ngModel)]="subject.subjectSemester" required min="1" />
+  </div>
+  <div>
+    <label>Activo:</label>
+    <input type="checkbox" name="is_active" [(ngModel)]="subject.is_active" />
+  </div>
+  <div style="margin-top: 1em;">
+    <button type="button" (click)="onCancel()">Cancelar</button>
+    <button type="button" [disabled]="!subjectForm.form.valid" (click)="onSave()">Guardar</button>
+  </div>
+</form>

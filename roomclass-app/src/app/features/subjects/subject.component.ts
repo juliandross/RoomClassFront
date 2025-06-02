@@ -63,11 +63,13 @@ export class SubjectComponent {
       }
     });
   }
-
   addSubject() {
     const dialogRef = this.dialog.open(SubjectCreateDialogComponent, {
-      width: '400px',
-      data: null // o datos para editar
+      width: '80vw',
+      maxWidth: '900px',
+      position: { top: '30' },
+      panelClass: 'dialog-centered',
+      data: null
     });
 
     dialogRef.afterClosed().subscribe(result => {
