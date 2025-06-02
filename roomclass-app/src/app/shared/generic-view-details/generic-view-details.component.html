@@ -1,0 +1,16 @@
+<div *ngIf="item" class="card shadow-sm mb-3">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">{{ title || 'Detalles' }}</h4>
+  </div>
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let key of getKeys(item)" class="list-group-item d-flex justify-content-between align-items-center">
+        <span class="fw-bold text-capitalize">{{ key }}</span>
+        <span>{{ item[key] }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="!item" class="text-muted">
+  No hay datos para mostrar.
+</div>
