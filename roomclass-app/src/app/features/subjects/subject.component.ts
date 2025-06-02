@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { GenericListComponent } from "../../shared/generic-list/generic-list.component";
 import { SubjectCreateDialogComponent } from './subject-create-dialog/subject-create-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-subject',
   standalone: true,
@@ -14,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class SubjectComponent {
   subjects: Subject[] = [];
-  constructor(private subjectService: SubjectService, private dialog: MatDialog) { }
+  constructor(private subjectService: SubjectService, private dialog: MatDialog, private router: Router ) { }
   ngOnInit() {
     this.subjectService.getSubjects().subscribe({
       next: (subjects) => {
@@ -27,15 +28,7 @@ export class SubjectComponent {
   } 
 
   viewSubject(subject: Subject) {
-    this.subjectService.viewSubject(subject.id).subscribe({
-      next: (result) => {
-        // Aquí puedes mostrar los detalles en un modal o similar
-        console.log('Subject details:', result);
-      },
-      error: (error) => {
-        console.error('Error viewing subject:', error);
-      }
-    });
+    this.router.navigate(['/home/asignaturas', subject.id]);
   }
 
   deleteSubject(subject: Subject) {
