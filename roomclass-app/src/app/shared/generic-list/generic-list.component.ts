@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-generic-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './generic-list.component.html',
   styleUrl: './generic-list.component.css'
 })
@@ -18,4 +19,18 @@ export class GenericListComponent {
   @Output() onEdit = new EventEmitter<any>(); // This output is used to emit the item to be edited when the edit button is clicked
   @Output() onDelete = new EventEmitter<any>(); // This output is used to emit the item to be deleted when the delete button is clicked
   @Output() onAdd = new EventEmitter<void>(); // This output is used to emit an event when the add button is clicked
+  
+  searchTerm: string = '';
+  filteredItems: any[] = [];
+
+  ngOnChanges() {
+    this.filteredItems = [...this.items];
+  }
+
+  onSearch() {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredItems = this.items.filter(item =>
+      item[this.nameAtribute]?.toLowerCase().includes(term)
+    );
+  }
 }
