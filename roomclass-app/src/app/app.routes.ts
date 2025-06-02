@@ -7,6 +7,10 @@ export const routes: Routes = [
         path: 'login',
         loadChildren: () => import('./features/login/login.routes').then(m => m.loginRoutes)
     },
+    {
+        path: 'registry',
+        loadChildren: () => import('./features/registry/registry.routes').then(m => m.registerRoutes)
+    },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     {
         path: 'home',

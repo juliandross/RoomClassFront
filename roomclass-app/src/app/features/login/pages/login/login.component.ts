@@ -63,5 +63,9 @@ export class LoginComponent {
     }
   });             
   }
+
+  onRegister() {
+    this.router.navigate(['/registry']);
+  }
 }
 
