@@ -20,8 +20,24 @@ img {
 }
 html, body {
   height: 100%;
+  min-height: 100vh;
   margin: 0;
-  overflow: hidden; 
+  padding: 0;
+}
+
+.cdk-overlay-container,
+.cdk-global-overlay-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.cdk-global-overlay-wrapper > * {
+  pointer-events: auto;
 }
 
 .siderbar {  
