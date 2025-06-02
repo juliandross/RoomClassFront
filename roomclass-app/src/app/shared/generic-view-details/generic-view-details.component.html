@@ -1,0 +1,14 @@
+<div *ngIf="item">
+  <h4 class="mb-3">{{ title || 'Detalles' }}</h4>
+  <table class="table table-bordered table-sm">
+    <tbody>
+      <tr *ngFor="let key of getKeys(item)">
+        <th class="text-capitalize">{{ key }}</th>
+        <td>{{ item[key] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="!item" class="text-muted">
+  No hay datos para mostrar.
+</div>
