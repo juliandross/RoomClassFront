@@ -11,17 +11,21 @@ import { GenericViewDetailsComponent } from "../../../shared/generic-view-detail
   imports: [GenericViewDetailsComponent]
 })
 export class SubjectDetailViewComponent implements OnInit {
+
   subject: Subject | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private subjectService: SubjectService
   ) {}
-
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.subjectService.viewSubject(id).subscribe({
-      next: (subject) => this.subject = subject
+      next: (subject) => {
+        console.log('Subject recibido:', subject);
+        this.subject = subject;
+      }
     });
   }
+
 }
