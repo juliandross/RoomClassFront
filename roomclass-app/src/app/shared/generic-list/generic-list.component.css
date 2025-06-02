@@ -1,0 +1,7 @@
+.add-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  font-size: 30px;
+  border-radius: 100%;
+}

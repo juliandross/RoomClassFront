@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class SubjectService {
-  private apiUrl = 'http://localhost:8000/AcademApi/subject/';
+  private apiUrl = 'http://localhost:8001/AcademApi/subject/';
   constructor(private httpClient:HttpClient) { }
   getSubjects():Observable<Subject[]> {
     return this.httpClient.get<Subject[]>(this.apiUrl);

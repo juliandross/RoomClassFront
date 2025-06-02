@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { delay, Observable, of, tap } from 'rxjs';
+import { delay, Observable, tap, throwError } from 'rxjs';
 import { User } from '../models/user'; // Asegúrate de que la ruta sea correcta
 
 @Injectable({ providedIn: 'root' })
@@ -15,8 +15,7 @@ export class AuthService {
     console.log('Login called with:', email, password);
     return this.http.post<{access: string; refresh: string}>(`${this.apiUrl}/api/token/`, { email, password }).pipe(
       tap(response => {
-        sessionStorage.setItem('token', response.access);
-        console.log('Token stored in sessionStorage:', response.access);
+        sessionStorage.setItem('token', response.access);     
       })
     );
     // Simulación de un login exitoso
@@ -49,14 +48,15 @@ export class AuthService {
   getProfile(): Observable<User> {
     const token = this.getToken();    
     let headers = new HttpHeaders; // Usar el objeto HttpHeaders de Angular
-    if (token) {
-      headers = headers.set('Authorization', `Bearer ${token}`);
-    }    
-    console.log('Obteniendo perfil del usuario con token:', token);
-    return this.http.get<User>(`${this.apiUrl}/users/1/`, { headers }).pipe(
+    if (!token) {
+      console.error('No token found in sessionStorage');
+      return throwError(() => new Error('No token found'));
+    }
+    headers = headers.set('Authorization', `Bearer ${token}`);
+    const id = this.getUserIdFromToken(token); // Función para extraer el ID del token        
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`, { headers }).pipe(
       tap(perfil => {
-        this.user = perfil;
-        console.log('Perfil del usuario obtenido:', perfil);
+        this.user = perfil;      
         })
       );
   }
@@ -76,4 +76,17 @@ export class AuthService {
   getUserRole(): string | null {
     return this.user ? this.user.rol : null;
   }
+  getUserIdFromToken(token: string): number | null {
+  if (!token) return null;
+  try {
+    const payload = token.split('.')[1];
+    const decoded = atob(payload);
+    const payloadObj = JSON.parse(decoded);
+    return payloadObj.user_id ?? null;
+  } catch (e) {
+    return null;
+    }
+  }
 }
+
+
