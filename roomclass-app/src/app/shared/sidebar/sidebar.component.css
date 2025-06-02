@@ -1,0 +1,56 @@
+.siderbar-container {
+  background-color: var(--secondary-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.siderbar-container .fa-circle-user {
+  color: white;
+  font-size: 50px;
+}
+
+.siderbar-container .fa-sm {
+  font-size: 1em !important;
+  color: inherit;
+}
+
+a {
+  font-size: 30px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+
+a:hover {
+  transform: scale(1.05);
+  color: white;
+}
+
+button {
+  transition: transform 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.dropdown-toggle {
+  font-size: 20px;
+}
+.nav-item {
+  display: flex;
+  align-items: center; 
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.nav-item span {
+  white-space: normal;       
+  word-break: break-word;    
+  line-height: 1.2;          
+  display: inline-block;     
+}

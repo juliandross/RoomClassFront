@@ -1,0 +1,13 @@
+<div class="header-container d-flex px-4 h-100 align-items-center w-100">
+    <!-- header.component.html -->
+    <nav class="breadcrumb-container">
+      <span *ngFor="let breadcrumb of breadcrumbs; let last = last">
+        <ng-container *ngIf="!last">
+          <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a> &gt;
+        </ng-container>
+        <ng-container *ngIf="last">
+            <span>{{ breadcrumb.label }}</span>
+        </ng-container>
+       </span>
+    </nav>
+</div>

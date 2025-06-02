@@ -1,0 +1,10 @@
+<app-generic-list
+  [name]="'Asignaturas'"
+  [nameAtribute]="'subjectName'"
+  [items]="subjects"
+  [showViewButton]="true"
+  (onAdd)="addSubject()"
+  (onEdit)="editSubject($event)"
+  (onDelete)="deleteSubject($event)"
+  (onView)="viewSubject($event)">
+</app-generic-list>

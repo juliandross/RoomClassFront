@@ -1,0 +1,8 @@
+.registry-bg {
+  background: var(--primary-color);
+  min-height: 100vh;
+}
+.registry-form {
+  width: 100%;
+  max-width: 350px;
+}
