@@ -38,6 +38,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/assignSubject/assign-subject.component').then(m => m.AssignSubjectComponent), 
                 data: { breadcrumb: 'Asignaciones' }
             },
+            {
+                path: 'asignaturas/:id',
+                loadComponent: () => import('./features/subjects/subject-detail-view/subject-detail-view.component').then(m => m.SubjectDetailViewComponent)
+            }
         ]
     },
 ];
