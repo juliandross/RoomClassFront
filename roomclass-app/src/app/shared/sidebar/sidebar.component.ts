@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-sidebar',
   standalone: true,
   imports: [CommonModule, RouterModule],
+  providers: [AuthService],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })

@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'app-subject',
   standalone: true,
   imports: [CommonModule, GenericListComponent],
+  providers: [SubjectService],
   templateUrl: './subject.component.html',
   styleUrl: './subject.component.css'
 })
