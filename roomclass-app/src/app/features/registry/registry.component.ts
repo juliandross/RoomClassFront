@@ -32,7 +32,7 @@ export class RegistryComponent {
     if (this.registerForm.invalid) return;
 
     // Agrega el rol por defecto antes de enviar
-    const body = { ...this.registerForm.value};
+    const body = { ...this.registerForm.value, rol: 'COORDINADOR' };
 
     this.http.post(this.baseUrl, body).subscribe({
       next: () => {
