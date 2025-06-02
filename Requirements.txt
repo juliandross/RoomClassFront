@@ -1,2 +1,4 @@
 jwt-decode
-sweet-alert
+sweetalert2
+@angular/material@17 
+@angular/cdk@17
