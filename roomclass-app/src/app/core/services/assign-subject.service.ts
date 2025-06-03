@@ -19,7 +19,7 @@ export class AssignSubjectService {
         map(response =>
           response.results.map(assign => ({
             ...assign,
-            displayName: `${assign.subject.subjectName} - ${assign.period.perSemester}`
+            displayName: `${assign.period.perSemester} - ${assign.subject.subjectName} - ${assign.teacher.first_name} ${assign.teacher.last_name}`
           }))
         )
       );

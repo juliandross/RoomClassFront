@@ -15,9 +15,9 @@ import { SubjectCompetenceWrapper } from '../../../../core/models/subject-compet
   templateUrl: './assign-subject-view.component.html',
   styleUrl: './assign-subject-view.component.css'
 })
-export class AssignSubjectViewComponent {
-  assignSubject : AssignSubject = new AssignSubject();
+export class AssignSubjectViewComponent {  
   competences: SubjectCompetenceWrapper[] = [];
+  item: any;
   constructor(
     private assignSubjectService:AssignSubjectService,
     private subjectCompetenceService: SubjectCompetenceService,
@@ -26,8 +26,15 @@ export class AssignSubjectViewComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.assignSubjectService.getAssignSubjectById(+id).subscribe({
-        next: (assignSubject) => {
-          this.assignSubject = assignSubject;
+        next: (assignSubject) => {          
+          this.item ={
+            Materia: assignSubject.subject.subjectName,
+            Descripción: assignSubject.subject.subjectDescription,
+            Creditos: assignSubject.subject.subjectCredits,
+            Semestre: assignSubject.subject.subjectSemester,
+            Profesor: assignSubject.teacher.first_name + ' ' + assignSubject.teacher.last_name,
+            Periodo: assignSubject.period.perSemester,
+          }
           this.subjectCompetenceService.getCompetencesBySubjectId(assignSubject.subject.id).subscribe({
             next: (competences) => {
               this.competences = competences;
