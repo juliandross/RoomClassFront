@@ -24,5 +24,8 @@ export class AssignSubjectService {
         )
       );
   }
+  getAssignSubjectById(id: number): Observable<AssignSubject> {
+    return this.httpClient.get<AssignSubject>(`${this.apiUrl}${id}/`);
+  }
 
 }
