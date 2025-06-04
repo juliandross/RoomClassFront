@@ -6,28 +6,24 @@
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" formControlName="email" disabled>
+        <input type="email" class="form-control" formControlName="email">
       </div>
       <div class="mb-3">
         <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" formControlName="first_name" required>
+        <input type="text" class="form-control" formControlName="first_name">
       </div>
       <div class="mb-3">
         <label class="form-label">Apellido</label>
-        <input type="text" class="form-control" formControlName="last_name" required>
+        <input type="text" class="form-control" formControlName="last_name">
       </div>
-      <div class="mb-3">
-        <label class="form-label">Rol</label>
-        <input type="text" class="form-control" formControlName="rol" disabled>
+      <div>
+        <label class="form-label">Contraseña</label>
+        <input type="password" class="form-control" formControlName="password">
       </div>
-      <div class="mb-3">
-        <label class="form-label">Activo</label>
-        <input type="text" class="form-control" formControlName="is_active" disabled>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Staff</label>
-        <input type="text" class="form-control" formControlName="is_staff" disabled>
-      </div>
+        <div class="mb-3">
+            <label class="form-label">Confirmar Contraseña</label>
+            <input type="password" class="form-control" formControlName="confirm_password">
+        </div>
       <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || loading">
         {{ loading ? 'Guardando...' : 'Guardar Cambios' }}
       </button>
