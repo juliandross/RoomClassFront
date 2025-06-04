@@ -35,13 +35,9 @@ export const routes: Routes = [
                 data: { breadcrumb: 'Programa' }
             },
             { path: 'asignar_materia', 
-                loadComponent: () => import('./features/assignSubject/assign-subject.component').then(m => m.AssignSubjectComponent), 
+                loadChildren: () => import('./features/assignSubject/assign-subject.routes').then(m => m.AssignSubjectRoutes), 
                 data: { breadcrumb: 'Asignaciones' }
             },
-            {
-                path: 'asignaturas/:id',
-                loadComponent: () => import('./features/subjects/subject-detail-view/subject-detail-view.component').then(m => m.SubjectDetailViewComponent)
-            }
         ]
     },
 ];
