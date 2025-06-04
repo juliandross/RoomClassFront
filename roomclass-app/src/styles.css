@@ -9,9 +9,9 @@ body{
     background-color: rgb(31, 89, 136);
 }
 :root{
-    --primary-color: rgb(38, 106, 161);
+    --primary-color: #4e68c6;
     --secondary-color: #4e68c6;    
-    --third-color:#f5f8f8;
+    --third-color:#e5e9e9;
 }
 img {
   max-width: 100%;
