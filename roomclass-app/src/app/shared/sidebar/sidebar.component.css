@@ -3,10 +3,12 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  border-radius: 10px;
+  justify-content: space-between;  
+  color: #f5f8ff;
 }
-
+.dropdown-toggle{
+  color: #f5f8ff;
+}
 .siderbar-container .fa-circle-user {
   color: white;
   font-size: 40px;
@@ -26,7 +28,7 @@ a {
 
 a:hover {
   transform: scale(1.05);
-  color: white;
+  color: #d6e8f5;
 }
 
 button {
