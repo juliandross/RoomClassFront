@@ -35,17 +35,12 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.authService.getProfile().subscribe({
-      next: (user: User) => {
-        this.user = user;
-        this.userForm.patchValue(user);
-        this.loading = false;
-      },
-      error: () => {
-        this.error = 'No se pudo cargar la información del usuario';
-        this.loading = false;
-      }
-    });
+      this.authService.getProfile().subscribe({
+        next: (user) => {
+          this.user = user;
+        }
+      });
+      console.log('User profile loaded:', this.user);
   }
 
   onSubmit() {

@@ -22,7 +22,7 @@
       </div>
         <div class="mb-3">
             <label class="form-label">Confirmar Contraseña</label>
-            <input type="password" class="form-control" formControlName="confirm_password">
+            <input type="password" class="form-control" formControlName="password2">
         </div>
       <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || loading">
         {{ loading ? 'Guardando...' : 'Guardar Cambios' }}
