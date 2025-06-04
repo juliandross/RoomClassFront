@@ -16,6 +16,6 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
   </div>
   <div class="modal-body">
-    <app-create-view-docentes (onCreated)="modal.close(); refreshTeachers()"></app-create-view-docentes>
+    <app-create-view-docentes (onCreated)="modal.close(); refreshTeachers();showSuccessSnack()"></app-create-view-docentes>
   </div>
 </ng-template>

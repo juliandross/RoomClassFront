@@ -5,6 +5,7 @@ import { TeacherService } from '../../core/services/teacher.service';
 import { GenericListComponent } from '../../shared/generic-list/generic-list.component';
 import { CreateViewDocentesComponent } from './create-view-docentes/create-view-docentes.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-docentes',
@@ -50,5 +51,15 @@ export class DocentesComponent implements OnInit {
   }
   addTeacher() {
     this.modalRef = this.modalService.open(this.createDocenteModal, { size: 'lg' });
+  }
+  showSuccessSnack() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Operación exitosa',
+      text: 'El docente ha sido creado exitosamente'
+    }).then(() => {
+      this.modalRef?.close();
+      this.refreshTeachers();
+    });
   }
 }

@@ -24,6 +24,6 @@ export class TeacherService {
 
   
   createTeacher(body: any): Observable<any> {
-    return this.http.post(this.CreateApiUrl, body);
+    return this.http.post(this.CreateApiUrl, body, {headers: this.getAuthHeaders()});
   }
 }
