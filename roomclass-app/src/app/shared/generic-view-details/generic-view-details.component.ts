@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SubjectCompetenceWrapper } from '../../core/models/subject-competence-wrapper';
 
 @Component({
   selector: 'app-generic-view-details',
@@ -8,7 +9,8 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class GenericViewDetailsComponent {
-  @Input() item: any = null;
+  @Input() competences: SubjectCompetenceWrapper[] = [];
+  @Input() item: any;
   @Input() title?: string;
   
   getKeys(obj: any): string[] {

@@ -16,13 +16,13 @@
                 <h5>{{ item[nameAtribute] }}</h5>                
             </div>
             <div class="subject-actions d-flex">
-                <button name="Mostrar {{name}}" class="btn btn-primary me-2" *ngIf="showViewButton" (click)="onView.emit(item)">
+                <button title="Mostrar {{name}}" class="btn btn-primary me-2" *ngIf="showViewButton" (click)="onView.emit(item)">
                     <i class="fa-solid fa-eye"></i>
                 </button>
-                <button name="Editar {{name}}" class="btn btn-secondary me-2" (click)="onEdit.emit(item)">
+                <button title="Editar {{name}}" class="btn btn-secondary me-2" (click)="onEdit.emit(item)">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button name="Eliminar {{name}}" class="btn btn-danger" (click)="onDelete.emit(item)">
+                <button title="Eliminar {{name}}" class="btn btn-danger" (click)="onDelete.emit(item)">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>           
