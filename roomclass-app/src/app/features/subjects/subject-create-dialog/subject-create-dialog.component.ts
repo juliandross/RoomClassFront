@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from '../../../core/models/subject';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TeacherService } from '../../../core/services/teacher.service';
+import { Teacher } from '../../../core/models/teacher';
 
 @Component({
   selector: 'app-subject-create-dialog',
@@ -19,21 +22,25 @@ export class SubjectCreateDialogComponent {
     subjectSemester: 1,
     is_active: true
   };
+  teachers: Teacher[] = [];
+  selectedTeacherId?: number;
+  
+  constructor(public activeModal: NgbActiveModal, private teacherService: TeacherService) {}
 
-  constructor(
-    private dialogRef: MatDialogRef<SubjectCreateDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    if (data) {
-      this.subject = { ...data };
-    }
+  ngOnInit() {
+    this.teacherService.getTeachers().subscribe(
+      teachers => this.teachers = teachers
+    );
   }
 
   onSave() {
-    this.dialogRef.close(this.subject);
+    this.activeModal.close({
+      ...this.subject,
+      teacherId: this.selectedTeacherId
+    });
   }
 
   onCancel() {
-    this.dialogRef.close();
+    this.activeModal.dismiss();
   }
 }

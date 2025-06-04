@@ -27,12 +27,12 @@ export class SubjectService {
   }
 
   putSubject(id: Number, subject: Subject): Observable<Subject> {
-    return this.httpClient.put<Subject>(`${this.apiUrl}${id}`, subject, { headers: this.getAuthHeaders() });
+    return this.httpClient.put<Subject>(`${this.apiUrl}${id}/`, subject, { headers: this.getAuthHeaders() });
   }
 
   deleteSubject(id: Number, subject: Subject): Observable<void> {
     subject.is_active = false;
-    return this.httpClient.put<void>(`${this.apiUrl}${id}`, subject, { headers: this.getAuthHeaders() });
+    return this.httpClient.put<void>(`${this.apiUrl}${id}/`, subject, { headers: this.getAuthHeaders() });
   }
 
   viewSubject(id: Number): Observable<Subject> {
@@ -40,6 +40,6 @@ export class SubjectService {
   }
 
   editSubject(id: Number, subject: Subject): Observable<Subject> {
-    return this.httpClient.put<Subject>(`${this.apiUrl}${id}`, subject, { headers: this.getAuthHeaders() });
+    return this.httpClient.put<Subject>(`${this.apiUrl}${id}/`, subject, { headers: this.getAuthHeaders() });
   }
 }
