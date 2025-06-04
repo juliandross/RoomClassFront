@@ -49,14 +49,14 @@ export class AuthService {
     const token = this.getToken();
     if (!token) {
       return throwError(() => new Error('No token found'));
-    }    
-    const id = this.getUserIdFromToken(token); // Función para extraer el ID del token        
-    return this.http.get<User>(`${this.apiUrl}/users/${id}`).pipe(
+    }
+    const id = this.getUserIdFromToken(token);
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`, { headers }).pipe(
       tap(perfil => {
-        this.user = perfil;              
-        })
-      );
-      
+        this.user = perfil;
+      })
+    );
   }
     // Simulación de una llamada a la API para obtener el perfil del usuario
     /*return of({
