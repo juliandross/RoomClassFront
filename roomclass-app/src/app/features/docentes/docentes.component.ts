@@ -5,6 +5,8 @@ import { TeacherService } from '../../core/services/teacher.service';
 import { GenericListComponent } from '../../shared/generic-list/generic-list.component';
 import { CreateViewDocentesComponent } from './create-view-docentes/create-view-docentes.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-docentes',
@@ -16,7 +18,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 export class DocentesComponent implements OnInit {
   teachers: Teacher[] = [];
   modalRef?: NgbModalRef;
-  constructor(private teacherService: TeacherService, private modalService: NgbModal) {}
+  constructor(private teacherService: TeacherService, private modalService: NgbModal, private router: Router) {}
   @ViewChild('createDocenteModal') createDocenteModal!: TemplateRef<any>;
   ngOnInit() {
     this.teacherService.getTeachers().subscribe({
@@ -40,15 +42,44 @@ export class DocentesComponent implements OnInit {
     });
   }
   viewTeacher(teacher: Teacher) {
-    // lógica para ver detalles
+    this.router.navigate(['/home/docentes', teacher.id]);
   }
   editTeacher(teacher: Teacher) {
-    // lógica para editar
+    this.router.navigate(['/home/docentes/editar', teacher.id]);
   }
-  deleteTeacher(teacher: Teacher) {
-    // lógica para eliminar
+  unactivateTeacher(teacher: Teacher) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar al docente ${teacher.first_name} ${teacher.last_name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.teacherService.unactivateTeacher(teacher.id).subscribe({
+          next: () => {
+            Swal.fire('Eliminado', 'El docente ha sido eliminado exitosamente', 'success');
+            this.refreshTeachers();
+          },
+          error: (err) => {
+            Swal.fire('Error', err.error?.detail || 'Error al eliminar el docente', 'error');
+          }
+        });
+      }
+    });
   }
   addTeacher() {
     this.modalRef = this.modalService.open(this.createDocenteModal, { size: 'lg' });
+  }
+  showSuccessSnack() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Operación exitosa',
+      text: 'El docente ha sido creado exitosamente'
+    }).then(() => {
+      this.modalRef?.close();
+      this.refreshTeachers();
+    });
   }
 }

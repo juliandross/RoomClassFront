@@ -26,6 +26,7 @@ export class CreateViewDocentesComponent {
       rol: [{ value: 'DOCENTE', disabled: true }, Validators.required],
       teaType: ['', Validators.required],
       teaTypeId: ['', Validators.required],
+      identification: ['', Validators.required],
       teaRecentTitle: ['', Validators.required]
     });
   }

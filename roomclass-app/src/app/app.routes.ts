@@ -43,6 +43,11 @@ export const routes: Routes = [
                         path: ':id',
                         loadComponent: () => import('./features/docentes/detail-view-docentes/detail-view-docentes.component').then(m => m.DetailViewDocentesComponent),
                         data: { breadcrumb: 'Detalle Docente' }
+                    },
+                    {
+                        path: 'editar/:id',
+                        loadComponent: () => import('./features/docentes/edit-view-docentes/edit-view-docentes.component').then(m => m.EditViewDocentesComponent),
+                        data: { breadcrumb: 'Editar Docente' }
                     }
                 ]
             },
