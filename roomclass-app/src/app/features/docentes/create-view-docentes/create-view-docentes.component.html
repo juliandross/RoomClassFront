@@ -1,0 +1,57 @@
+<form [formGroup]="docenteForm" (ngSubmit)="onSubmit()" class="p-2">
+  <div class="mb-3">
+    <label class="form-label">Correo electrónico</label>
+    <input type="email" class="form-control" formControlName="email" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Nombre</label>
+    <input type="text" class="form-control" formControlName="first_name" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Apellido</label>
+    <input type="text" class="form-control" formControlName="last_name" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Contraseña</label>
+    <input type="password" class="form-control" formControlName="password" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Rol</label>
+    <input type="text" class="form-control" formControlName="rol" value="DOCENTE" readonly>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Tipo de Docente</label>
+    <select class="form-select" formControlName="teaType" required>
+    <option value="" disabled selected>Seleccione...</option>
+    <option value="Catedra">Catedra</option>
+    <option value="Asociado">Asociado</option>
+    <option value="Planta">Planta</option>
+    <option value="OPS">OPS</option>
+  </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Tipo de Identificación</label>
+    <select class="form-select" formControlName="teaTypeId" required>
+      <option value="" disabled selected>Seleccione...</option>
+      <option value="CC">Cédula de Ciudadanía</option>
+      <option value="TI">Tarjeta de Identidad</option>
+      <option value="CE">Cédula de Extranjería</option>
+      <option value="PA">Pasaporte</option>
+      <option value="RC">Registro Civil</option>
+      <option value="PEP">Permiso Especial de Permanencia</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Número de Identificación</label>
+    <input type="text" class="form-control" formControlName="identification" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Título Reciente</label>
+    <input type="text" class="form-control" formControlName="teaRecentTitle" required>
+  </div>
+  <button type="submit" class="btn btn-primary w-100" [disabled]="docenteForm.invalid || loading">
+    {{ loading ? 'Creando...' : 'Crear Docente' }}
+  </button>
+  <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+  <div *ngIf="success" class="alert alert-success mt-2">¡Docente creado exitosamente!</div>
+</form>

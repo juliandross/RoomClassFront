@@ -22,13 +22,39 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) ,
                 data: { breadcrumb: null },
             },
+            {
+            path: 'perfil',
+            loadComponent: () => import('./features/user-profile/user-profile.component').then(m => m.UserProfileComponent),
+            data: { breadcrumb: 'Mi Perfil' }
+            },
             { path: 'asignaturas', 
                 loadComponent: () => import('./features/subjects/subject.component').then(m => m.SubjectComponent), 
                 data: { breadcrumb: 'Asignaturas' }
             },                
-            { path: 'docentes',
-                loadComponent: () => import('./features/docentes/docentes.component').then(m => m.DocentesComponent), 
-                data: { breadcrumb: 'Docentes' }
+            { 
+                path: 'docentes',
+                data: { breadcrumb: 'Docentes' },
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () => import('./features/docentes/docentes.component').then(m => m.DocentesComponent)
+                    },
+                    {
+                        path: 'crear',
+                        loadComponent: () => import('./features/docentes/create-view-docentes/create-view-docentes.component').then(m => m.CreateViewDocentesComponent),
+                        data: { breadcrumb: 'Crear Docente' }
+                    },
+                    {
+                        path: ':id',
+                        loadComponent: () => import('./features/docentes/detail-view-docentes/detail-view-docentes.component').then(m => m.DetailViewDocentesComponent),
+                        data: { breadcrumb: 'Detalle Docente' }
+                    },
+                    {
+                        path: 'editar/:id',
+                        loadComponent: () => import('./features/docentes/edit-view-docentes/edit-view-docentes.component').then(m => m.EditViewDocentesComponent),
+                        data: { breadcrumb: 'Editar Docente' }
+                    }
+                ]
             },
             { path: 'programa', 
                 loadComponent: () => import('./features/programa/programa.component').then(m => m.ProgramaComponent), 

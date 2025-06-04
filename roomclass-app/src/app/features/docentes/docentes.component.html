@@ -1,3 +1,21 @@
-<div class="d-flex justify-content-center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/SITIO-EN-CONSTRUCCION.jpg" alt="" width="60%" height="100%">
-</div>
+<app-generic-list
+  [name]="'Docentes'"
+  [nameAtribute]="'displayName'"
+  [items]="teachers"
+  [showViewButton]="true"
+  (onAdd)="addTeacher()"
+  (onEdit)="editTeacher($event)"
+  (onDelete)="unactivateTeacher($event)"
+  (onView)="viewTeacher($event)">
+</app-generic-list>
+
+<!-- Modal para crear docente -->
+<ng-template #createDocenteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Crear Docente</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <app-create-view-docentes (onCreated)="modal.close(); refreshTeachers();showSuccessSnack()"></app-create-view-docentes>
+  </div>
+</ng-template>
