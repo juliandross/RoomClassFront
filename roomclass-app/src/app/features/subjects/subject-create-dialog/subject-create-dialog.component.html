@@ -26,16 +26,9 @@
         <input type="number" name="subjectSemester" [(ngModel)]="subject.subjectSemester" required min="1" />
       </div>
     </div>
-    <div class="form-grid">
+    <div class="form-grid" style="justify-content: center;">
       <div class="form-group">
-        <label>Profesor</label>
-        <select name="selectedTeacherId" [(ngModel)]="selectedTeacherId" required>
-          <option [ngValue]="undefined" disabled selected>Seleccione un profesor</option>
-          <option *ngFor="let teacher of teachers" [ngValue]="teacher.id">{{ teacher.first_name }} {{teacher.last_name}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-         <button type="button" class="asociate">
+         <button type="button" class="asociate" (click)="onAssociateCompetencies()">
             Relacionar Competencias de Programa
         </button>
       </div>

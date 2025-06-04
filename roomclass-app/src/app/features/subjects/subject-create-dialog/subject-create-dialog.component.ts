@@ -6,6 +6,9 @@ import { Subject } from '../../../core/models/subject';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherService } from '../../../core/services/teacher.service';
 import { Teacher } from '../../../core/models/teacher';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LinkupCompetencesComponent } from '../linkup-competences/linkup-competences.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-subject-create-dialog',
@@ -22,25 +25,37 @@ export class SubjectCreateDialogComponent {
     subjectSemester: 1,
     is_active: true
   };
-  teachers: Teacher[] = [];
-  selectedTeacherId?: number;
+  selectedCompetenceIds: number[] = [];
   
-  constructor(public activeModal: NgbActiveModal, private teacherService: TeacherService) {}
+  constructor(public activeModal: NgbActiveModal, private modalService: NgbModal) {}
 
-  ngOnInit() {
-    this.teacherService.getTeachers().subscribe(
-      teachers => this.teachers = teachers
-    );
-  }
 
   onSave() {
     this.activeModal.close({
       ...this.subject,
-      teacherId: this.selectedTeacherId
+      programCompetencesIds: this.selectedCompetenceIds
     });
   }
 
   onCancel() {
     this.activeModal.dismiss();
+  }
+
+  onAssociateCompetencies() {
+    //otro modal
+    const modalRef = this.modalService.open(LinkupCompetencesComponent, {
+          size: 'lg', 
+          centered: true,
+    });
+    // Espera el resultado del modal de competencias
+    modalRef.result.then((selectedCompetencesIds) => {
+    if (selectedCompetencesIds) {
+      // Guarda las competencias seleccionadas en la asignatura (puedes usar otro campo si lo prefieres)
+      this.selectedCompetenceIds = selectedCompetencesIds;
+      Swal.fire('Competencias asociadas', 'Competencias asociadas correctamente', 'success');
+    }
+  }, (reason) => {
+    // Modal cerrado sin seleccionar competencias
+  });
   }
 }
