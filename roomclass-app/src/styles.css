@@ -8,9 +8,11 @@ body{
 .btn-primary:hover{
     background-color: rgb(31, 89, 136);
 }
+
+/*#4e68c6*/
 :root{
-    --primary-color: #4e68c6;
-    --secondary-color: #4e68c6;    
+    --primary-color: #0d4185;
+    --secondary-color: #0d4185;    
     --third-color:#e5e9e9;
 }
 img {

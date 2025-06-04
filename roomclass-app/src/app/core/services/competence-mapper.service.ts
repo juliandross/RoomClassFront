@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { SubjectCompetenceWrapper, SubjectRA } from '../models/subject';
+import { ProgramCompetenceRAResponse } from '../models/ProgramCompetence';
 
 // Define las interfaces de destino en el mismo archivo o en un archivo de modelos separado
 export interface Competence {
-    description: string;
+  id:number;  
+  description: string;
 }
 
 export interface RA {
-    description: string;
+  id:number;
+  description: string;
 }
 
 export interface CompetenceWrapper {
@@ -31,10 +34,12 @@ export class CompetenceMapperService {
         subjectCompetenceWrapper: SubjectCompetenceWrapper
     ): CompetenceWrapper {
         const competence: Competence = {
+            id: subjectCompetenceWrapper.SubjectCompetence.id,
             description: subjectCompetenceWrapper.SubjectCompetence.compDescription,
         };
 
         const ras: RA[] = subjectCompetenceWrapper.SubjectRA.map((subjectRA: SubjectRA) => ({
+            id: subjectRA.id,
             description: subjectRA.raDescription,
         }));
 
@@ -43,4 +48,20 @@ export class CompetenceMapperService {
             ras: ras,
         };
     }
+    mapProgramCompetenceToCompetenceWrapper(
+      programCompetence: ProgramCompetenceRAResponse): CompetenceWrapper {
+        const competence: Competence = { 
+            id: programCompetence.competenceProgram.id,         
+            description: programCompetence.competenceProgram.proCompDescription,
+        };
+        const ras: RA[] = programCompetence.RA_Program.map((ra) => ({
+            id: ra.id,
+            description: ra.proRADescription,
+        }));
+
+        return {
+            competence: competence,
+            ras: ras,
+        };
+      }
 }
