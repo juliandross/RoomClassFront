@@ -6,8 +6,8 @@ import { AuthService } from '../../core/auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProgramCompetenceService {
-  private apiUrl = 'http://localhost:8001/AcademApi/programCompetence/RA_asociated/';
-
+  private apiRAAsociatedUrl = 'http://localhost:8001/AcademApi/programCompetence/RA_asociated/';
+  private deleteUrl = 'http://localhost:8001/AcademApi/programCompetence/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -18,6 +18,12 @@ export class ProgramCompetenceService {
   }
 
   getProgramCompetences(): Observable<ProgramCompetenceRAResponse[]> {
-    return this.http.get<ProgramCompetenceRAResponse[]>(this.apiUrl, { headers: this.getAuthHeaders() });
+    return this.http.get<ProgramCompetenceRAResponse[]>(this.apiRAAsociatedUrl, { headers: this.getAuthHeaders() });
+  }
+
+  
+  deleteProgramCompetence(id: number): Observable<any> {
+    const url = `${this.deleteUrl}${id}/`;
+    return this.http.delete(url, { headers: this.getAuthHeaders() });
   }
 }
