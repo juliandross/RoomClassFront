@@ -11,4 +11,5 @@ import { CompetenceWrapper } from '../../../core/services/competence-mapper.serv
 })
 export class GenericViewCompetencesComponent {
   @Input() competencesWrapper:CompetenceWrapper[] = [];    
+  @Input() programView: boolean = false;
 }

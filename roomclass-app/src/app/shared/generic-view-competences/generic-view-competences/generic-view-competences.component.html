@@ -3,7 +3,7 @@
     <div class="header-container d-flex justify-content-between p-3">
       <h2>Competencias</h2>
       <div class="btn-group col-6">
-        <button class="btn btn-secondary ">Importar</button>
+        <button class="btn btn-secondary" *ngIf="!programView" disabled>Importar</button>
         <button class="btn btn-primary ">Crear</button>
       </div>
     </div>
@@ -29,9 +29,12 @@
           </div>
         </summary>
         <div class="border-top mt-3 pt-3">
-          <h5>Resultados de Aprendizaje</h5>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5>Resultados de Aprendizaje</h5>
+            <button class="btn btn-primary">Crear RA</button>                        
+          </div>          
           <div class="alert alert-info" *ngIf="competenceWrapper.ras.length === 0">
-            No hay RA registrados.
+            No hay RA registrados.          
           </div>
           <ul class="ra list list-group">
             <li *ngFor="let ra of competenceWrapper.ras" class="list-group-item d-flex justify-content-between align-items-center">
@@ -49,6 +52,7 @@
               </div>
             </li>
           </ul>
+          
         </div>      
       </details>
     </div>    
