@@ -46,19 +46,17 @@ export class AuthService {
   }
   //Se debe hacer un método para obtener el perfil del usuario por medio de su email
   getProfile(): Observable<User> {
-    const token = this.getToken();    
-    let headers = new HttpHeaders; // Usar el objeto HttpHeaders de Angular
+    const token = this.getToken();
     if (!token) {
-      console.error('No token found in sessionStorage');
       return throwError(() => new Error('No token found'));
-    }
-    headers = headers.set('Authorization', `Bearer ${token}`);
+    }    
     const id = this.getUserIdFromToken(token); // Función para extraer el ID del token        
-    return this.http.get<User>(`${this.apiUrl}/users/${id}`, { headers }).pipe(
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`).pipe(
       tap(perfil => {
-        this.user = perfil;      
+        this.user = perfil;              
         })
       );
+      
   }
     // Simulación de una llamada a la API para obtener el perfil del usuario
     /*return of({
@@ -71,6 +69,7 @@ export class AuthService {
     );*/    
   
   getUser(): User | null {
+    console.log('Obteniendo usuario:', this.user);
     return this.user;
   }
   getUserRole(): string | null {

@@ -1,3 +1,10 @@
-<div class="d-flex justify-content-center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/SITIO-EN-CONSTRUCCION.jpg" alt="" width="60%" height="100%">
-</div>
+<app-generic-list
+  [name]="'Docentes'"
+  [nameAtribute]="'displayName'"
+  [items]="teachers"
+  [showViewButton]="true"
+  (onAdd)="addTeacher()"
+  (onEdit)="editTeacher($event)"
+  (onDelete)="deleteTeacher($event)"
+  (onView)="viewTeacher($event)">
+</app-generic-list>

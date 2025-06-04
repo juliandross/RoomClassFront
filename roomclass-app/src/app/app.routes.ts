@@ -34,6 +34,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/programa/programa.component').then(m => m.ProgramaComponent), 
                 data: { breadcrumb: 'Programa' }
             },
+            { path: 'asignar_materia', 
+                loadChildren: () => import('./features/assignSubject/assign-subject.routes').then(m => m.AssignSubjectRoutes), 
+                data: { breadcrumb: 'Asignaciones' }
+            },
         ]
     },
 ];

@@ -10,8 +10,8 @@ body{
 }
 :root{
     --primary-color: rgb(38, 106, 161);
-    --secondary-color: rgb(74, 174, 255);    
-    --third-color: rgb(179, 179, 179);
+    --secondary-color: #4e68c6;    
+    --third-color:#f5f8f8;
 }
 img {
   max-width: 100%;

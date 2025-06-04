@@ -1,0 +1,68 @@
+<div class="p-3">
+  <div *ngIf="item" class="card shadow-sm mb-3">
+    <div class="d-flex justify-content-between align-items-center p-3">
+      <h2 class="mb-0">{{ title || 'Detalles' }}</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let key of getKeys(item)" class="list-group-item d-flex justify-content-between align-items-center">
+          <span class="fw-bold text-capitalize">{{ key }}</span>
+          <span>{{ item[key] }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div *ngIf="!item" class="text-muted">
+  No hay datos para mostrar.
+</div>
+<div class="p-3">
+  <div class="p-3 card shadow-sm mb-3 p-3">
+    <div class="header-container d-flex justify-content-between p-3">
+      <h2>Competencias</h2>
+      <div class="btn-group col-6">
+        <button class="btn btn-secondary ">Importar</button>
+        <button class="btn btn-primary ">Crear</button>
+      </div>
+    </div>
+    <div class="competences-container border rounded">
+      <div class="alert alert-info" *ngIf="competences.length === 0">
+        No hay competencias registradas.
+      </div>
+      <details *ngFor="let competence of competences" class="border-bottom p-3">
+        <summary class="d-flex justify-content-between">
+          <div>
+            <i class="fa-solid fa-caret-down"></i>
+            <span>            
+              {{competence.SubjectCompetence.compDescription}}
+            </span>          
+          </div>
+          <div>
+            <button title="Editar competencia" class="btn btn-secondary me-2">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button title="Eliminar competencia" class="btn btn-danger">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </summary>
+        <div class="border-top mt-3 pt-3">
+          <h5>Resultados de Aprendizaje</h5>
+          <ul class="ra list list-group">
+            <li *ngFor="let ra of competence.SubjectRA" class="list-group-item d-flex justify-content-between align-items-center">
+              <span>{{ra.raDescription}}</span>
+              <div>
+                <button title="Editar competencia" class="btn btn-secondary me-2">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button title="Eliminar competencia" class="btn btn-danger">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>      
+      </details>
+    </div>    
+  </div>
+</div>
