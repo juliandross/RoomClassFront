@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable} from 'rxjs';
-import { SubjectCompetenceWrapper } from '../models/subject-competence-wrapper';
+import { SubjectCompetenceWrapper } from '../models/subject';
 
 @Injectable({
   providedIn: 'root'

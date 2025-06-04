@@ -1,0 +1,61 @@
+<div class="p-3">
+  <div class="p-3 card shadow-sm mb-3 p-3">
+    <div class="header-container d-flex justify-content-between p-3">
+      <h2>Competencias</h2>
+      <div class="btn-group col-6">
+        <button class="btn btn-secondary" *ngIf="!programView" disabled>Importar</button>
+        <button class="btn btn-primary ">Crear</button>
+      </div>
+    </div>
+    <div class="competences-container border rounded">
+      <div class="alert alert-info" *ngIf="competencesWrapper.length === 0">
+        No hay competencias registradas.
+      </div>
+      <details *ngFor="let competenceWrapper of competencesWrapper" class="border-bottom p-3">
+        <summary class="d-flex justify-content-between">
+          <div>
+            <i class="fa-solid fa-caret-down"></i>
+            <span>            
+              {{competenceWrapper.competence.description}}
+            </span>          
+          </div>
+          <div>
+            <button title="Editar competencia" class="btn btn-secondary me-2">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button title="Eliminar competencia" class="btn btn-danger">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </summary>
+        <div class="border-top mt-3 pt-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5>Resultados de Aprendizaje</h5>
+            <button class="btn btn-primary">Crear RA</button>                        
+          </div>          
+          <div class="alert alert-info" *ngIf="competenceWrapper.ras.length === 0">
+            No hay RA registrados.          
+          </div>
+          <ul class="ra list list-group">
+            <li *ngFor="let ra of competenceWrapper.ras" class="list-group-item d-flex justify-content-between align-items-center">
+              <span>{{ra.description}}</span>
+              <div>
+                <button title="Mostrar RA" class="btn btn-primary me-2">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+                <button title="Editar RA" class="btn btn-secondary me-2">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button title="Eliminar RA" class="btn btn-danger">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+          
+        </div>      
+      </details>
+    </div>    
+  </div>
+</div>
+

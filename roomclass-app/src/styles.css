@@ -8,10 +8,12 @@ body{
 .btn-primary:hover{
     background-color: rgb(31, 89, 136);
 }
+
+/*#4e68c6*/
 :root{
-    --primary-color: rgb(38, 106, 161);
-    --secondary-color: #4e68c6;    
-    --third-color:#f5f8f8;
+    --primary-color: #0d4185;
+    --secondary-color: #0d4185;    
+    --third-color:#e5e9e9;
 }
 img {
   max-width: 100%;
