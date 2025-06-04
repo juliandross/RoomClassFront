@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h3 class="modal-title">Relacionar competencias</h3>
+</div>
+
+<div class="modal-body">
+    <form #competenceForm="ngForm">
+        <div *ngFor="let programCompetence of programCompetences">
+            <label>
+                <input type="checkbox"
+                        [value]="programCompetence.competenceProgram.id"
+                        [checked]="selectedCompetenceIds.includes(programCompetence.competenceProgram.id)"
+                        (change)="onCheckBoxChange($event, programCompetence.competenceProgram.id)"/>
+                         {{ programCompetence.competenceProgram.proCompDescription }}   
+            </label>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="cancel" (click)="onCancel()">Cancelar</button>
+            <button type="button" class="link" [disabled]="!competenceForm.form.valid" (click)="onLink()">Relacionar</button>
+        </div>
+    </form>
+</div>

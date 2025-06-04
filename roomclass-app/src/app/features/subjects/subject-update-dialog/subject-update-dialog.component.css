@@ -109,9 +109,10 @@ button:disabled {
 }
 
 button.asociate {
-  background-color: #6c6e74;
+  background-color: #4e68c6;
   color: white;
   border: none;
+  justify-content: center;
 }
 
 .form-grid {

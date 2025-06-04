@@ -1,0 +1,60 @@
+
+form > div {
+  margin-bottom: 1.2em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+button {
+  margin-right: 1em;
+  padding: 0.5em 1.5em;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-header {
+  background-color: #4e68c6;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+.modal-title {
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+}
+
+button.cancel {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+button.link {
+  background-color: #2e92cc;
+  color: white;
+  border: none;
+}
+
+input[type="checkbox"] {
+  transform: scale(2.0);
+  margin-right: 8px;
+}
