@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">Creación de asignatura</h3>
+  <h3 class="modal-title">Edición de asignatura</h3>
 </div>
 
 <div class="modal-body">
@@ -27,13 +27,12 @@
       </div>
     </div>
     <div class="form-grid">
-      <div class="form-group">
-        <label>Profesor</label>
-        <select name="selectedTeacherId" [(ngModel)]="selectedTeacherId" required>
-          <option [ngValue]="undefined" disabled selected>Seleccione un profesor</option>
-          <option *ngFor="let teacher of teachers" [ngValue]="teacher.id">{{ teacher.first_name }} {{teacher.last_name}}</option>
-        </select>
-      </div>
+        <div class="form-group">
+            <label>Profesor</label>
+            <select required disabled>
+                <option [ngValue]="undefined" disabled selected>Seleccione un profesor</option>
+            </select>
+        </div>
       <div class="form-group">
          <button type="button" class="asociate">
             Relacionar Competencias de Programa
@@ -42,7 +41,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="cancel" (click)="onCancel()">Cancelar</button>
-      <button type="button" class="create" [disabled]="!subjectForm.form.valid" (click)="onSave()">Crear</button>
+      <button type="button" class="store" [disabled]="!subjectForm.form.valid" (click)="onSave()">Guardar</button>
     </div>
   </form>
 </div>
