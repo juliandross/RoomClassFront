@@ -16,3 +16,24 @@ export interface Teacher {
     groups?: any[]; 
     user_permissions?: any[];
 }
+
+export interface TeacherShowable {
+    id: number;
+    email: string;
+    first_name: string;
+    last_name: string;
+    identification: number;
+    teaType?: string; 
+    teaTypeId?: string; 
+    teaRecentTitle?: string;
+}
+
+export interface TeacherInfo{
+    email: string,
+    identificacion: string,
+    Nombres: string,
+    Apellidos: string,
+    Tipo_de_identificacion:  string,
+    tipo_de_docente: string,
+    Titulo_mas_reciente: string,
+}

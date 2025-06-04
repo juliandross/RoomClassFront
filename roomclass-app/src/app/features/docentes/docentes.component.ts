@@ -5,6 +5,7 @@ import { TeacherService } from '../../core/services/teacher.service';
 import { GenericListComponent } from '../../shared/generic-list/generic-list.component';
 import { CreateViewDocentesComponent } from './create-view-docentes/create-view-docentes.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,7 +18,7 @@ import Swal from 'sweetalert2';
 export class DocentesComponent implements OnInit {
   teachers: Teacher[] = [];
   modalRef?: NgbModalRef;
-  constructor(private teacherService: TeacherService, private modalService: NgbModal) {}
+  constructor(private teacherService: TeacherService, private modalService: NgbModal, private router: Router) {}
   @ViewChild('createDocenteModal') createDocenteModal!: TemplateRef<any>;
   ngOnInit() {
     this.teacherService.getTeachers().subscribe({
@@ -41,7 +42,7 @@ export class DocentesComponent implements OnInit {
     });
   }
   viewTeacher(teacher: Teacher) {
-    // lógica para ver detalles
+    this.router.navigate(['/home/docentes', teacher.id]);
   }
   editTeacher(teacher: Teacher) {
     // lógica para editar
