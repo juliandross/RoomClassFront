@@ -1,32 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramCompetenceService } from '../../core/services/ProgramCompetence.service';
 import { ProgramCompetenceRAResponse } from '../../core/models/ProgramCompetence';
-import { GenericListComponent } from '../../shared/generic-list/generic-list.component';
+import { GenericViewDetailsComponent } from '../../shared/generic-view-details/generic-view-details.component';
 import Swal from 'sweetalert2';
+import { GenericViewCompetencesComponent } from "../../shared/generic-view-competences/generic-view-competences/generic-view-competences.component";
 
 @Component({
   selector: 'app-program-competence-list',
-  standalone: true,
-  template: `
-    <app-generic-list
-      [name]="'Competencias de Programa'"
-      [nameAtribute]="'proCompDescription'"
-      [items]="competences"
-      [showViewButton]="true"
-      (onView)="viewCompetence($event)"
-      (onAdd)="addCompetence($event)"
-      (onEdit)="editCompetence($event)"
-      (onDelete)="deleteCompetence($event)">
-    </app-generic-list>
-  `,
-  imports: [GenericListComponent]
+  standalone: true,  
+  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent],
+  providers: [ProgramCompetenceService],
+  templateUrl: './programa.component.html',
 })
 export class ProgramaComponent implements OnInit {
   competences: any[] = [];
-
+  item: any;
   constructor(private programCompetenceService: ProgramCompetenceService) {}
 
   ngOnInit() {
+    this.item = {
+      Programa: 'Ingeniería de Sistemas',
+      Descripción: 'Carrera enfocada en el desarrollo de software y sistemas computacionales.',
+      Creditos: 180,
+      Duración: '9 semestres',
+      Coordinador: 'Dr. Juan Pérez',      
+    }
     this.programCompetenceService.getProgramCompetences().subscribe({
       next: (data) => {
         // Extrae el objeto competenceProgram y le añade el array RA_Program para mostrarlo en la lista
