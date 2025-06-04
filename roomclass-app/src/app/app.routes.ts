@@ -22,6 +22,11 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) ,
                 data: { breadcrumb: null },
             },
+            {
+            path: 'perfil',
+            loadComponent: () => import('./features/user-profile/user-profile.component').then(m => m.UserProfileComponent),
+            data: { breadcrumb: 'Mi Perfil' }
+            },
             { path: 'asignaturas', 
                 loadComponent: () => import('./features/subjects/subject.component').then(m => m.SubjectComponent), 
                 data: { breadcrumb: 'Asignaturas' }

@@ -1,0 +1,34 @@
+<div class="card shadow-sm mt-3">
+  <div class="card-header">
+    <h4>Mi Perfil</h4>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" formControlName="email">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" formControlName="first_name">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Apellido</label>
+        <input type="text" class="form-control" formControlName="last_name">
+      </div>
+      <div>
+        <label class="form-label">Contraseña</label>
+        <input type="password" class="form-control" formControlName="password">
+      </div>
+        <div class="mb-3">
+            <label class="form-label">Confirmar Contraseña</label>
+            <input type="password" class="form-control" formControlName="confirm_password">
+        </div>
+      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || loading">
+        {{ loading ? 'Guardando...' : 'Guardar Cambios' }}
+      </button>
+      <div *ngIf="success" class="alert alert-success mt-2">¡Perfil actualizado exitosamente!</div>
+      <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+    </form>
+  </div>
+</div>

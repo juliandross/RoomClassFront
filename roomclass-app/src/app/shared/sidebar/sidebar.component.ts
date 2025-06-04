@@ -33,7 +33,7 @@ export class SidebarComponent {
   }
 
   goToUserManagement() {
-    this.router.navigate(['/home/gestion-usuario']);
+    this.router.navigate(['/home/perfil'], { queryParams: { userId: this.user?.id } });
   }
 }
 
