@@ -45,7 +45,7 @@ export class DocentesComponent implements OnInit {
     this.router.navigate(['/home/docentes', teacher.id]);
   }
   editTeacher(teacher: Teacher) {
-    // lógica para editar
+    this.router.navigate(['/home/docentes/editar', teacher.id]);
   }
   unactivateTeacher(teacher: Teacher) {
     Swal.fire({

@@ -22,6 +22,7 @@ export class RegistryComponent {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      identification: ['', Validators.required],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required]
     });
@@ -48,7 +49,7 @@ export class RegistryComponent {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Error al registrar usuario'
+          text: err.error?.detail || 'Error al registrar usuario'
         });
       }
     });

@@ -11,6 +11,7 @@ export class TeacherService {
   private CreateApiUrl = 'http://localhost:8001/AcademApi/teacherCreateByCoordinator/';
   private UnactivateApiUrl = 'http://localhost:8001/AcademApi/unactivateTeacher/';
   private ViewApiUrl = 'http://localhost:8001/AcademApi/teacher/';
+  private patchApiUrl = 'http://localhost:8001/AcademApi/patchTeacher/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -35,22 +36,12 @@ export class TeacherService {
   }
 
   editTeacher(id: number, body: any): Observable<any> {
-    const url = `${this.CreateApiUrl}${id}/`;
-    return this.http.put(url, body, { headers: this.getAuthHeaders() });
+    const url = `${this.patchApiUrl}${id}/`;
+    return this.http.patch(url, body, { headers: this.getAuthHeaders() });
   }
 
-  getTeacherById(id: number): Observable<TeacherInfo> {
+  getTeacherById(id: number): Observable<Teacher> {
     const url = `${this.ViewApiUrl}${id}/`;
-    return this.http.get<any>(url, { headers: this.getAuthHeaders() }).pipe(
-      map(data => ({
-        email: data.email,
-        identificacion: data.identification,
-        Nombres: data.first_name,
-        Apellidos: data.last_name,
-        Tipo_de_identificacion:  data.teaTypeId,
-        tipo_de_docente: data.teaType,
-        Titulo_mas_reciente: data.teaRecentTitle,
-      }))    
-    );
+    return this.http.get<any>(url, { headers: this.getAuthHeaders() })
   }
 }

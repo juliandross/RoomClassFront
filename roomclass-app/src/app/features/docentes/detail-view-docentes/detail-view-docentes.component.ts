@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TeacherService } from '../../../core/services/teacher.service';
-import { TeacherInfo } from '../../../core/models/teacher';
+import { Teacher, TeacherInfo } from '../../../core/models/teacher';
 import { GenericViewDetailsComponent } from '../../../shared/generic-view-details/generic-view-details.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { GenericViewDetailsComponent } from '../../../shared/generic-view-detail
   imports: [GenericViewDetailsComponent]
 })
 export class DetailViewDocentesComponent implements OnInit {
-  teacher: TeacherInfo | null = null;
+  teacher: Teacher | null = null;
   item: any = null;
 
 
@@ -27,12 +27,12 @@ export class DetailViewDocentesComponent implements OnInit {
         this.teacher = teacher;
         this.item = {
           'Correo electrónico': teacher.email,
-          'Identificación': teacher.identificacion,
-          'Nombres': teacher.Nombres,
-          'Apellidos': teacher.Apellidos,
-          'Tipo de identificación': teacher.Tipo_de_identificacion,
-          'Tipo de docente': teacher.tipo_de_docente,
-          'Título más reciente': teacher.Titulo_mas_reciente
+          'Identificación': teacher.identification,
+          'Nombres': teacher.first_name,
+          'Apellidos': teacher.last_name,
+          'Tipo de identificación': teacher.teaTypeId,
+          'Tipo de docente': teacher.teaType,
+          'Título más reciente': teacher.teaRecentTitle
         };
       },
       error: (error) => {
