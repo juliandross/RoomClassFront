@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user';
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private apiUrl = 'http://localhost:8001/users/patch/';
+  private apiUrl = 'http://localhost:8000/users/patch/';
 
   constructor(private http: HttpClient) {}
 
     updateUser(id: number, user: User): Observable<User> {
         const url = `${this.apiUrl}${id}/`;
-        return this.http.put<User>(url, user);
+        return this.http.patch<User>(url, user);
     }
 }
