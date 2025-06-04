@@ -3,5 +3,8 @@
   [nameAtribute]="'proCompDescription'"
   [items]="competences"
   [showViewButton]="true"
-  (onView)="viewCompetence($event)">
+  (onView)="viewCompetence($event)"
+  (onAdd)="addCompetence()"
+  (onEdit)="editCompetence($event)"
+  (onDelete)="deleteCompetence($event)">
 </app-generic-list>
