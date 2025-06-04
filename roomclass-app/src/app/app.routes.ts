@@ -26,9 +26,25 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/subjects/subject.component').then(m => m.SubjectComponent), 
                 data: { breadcrumb: 'Asignaturas' }
             },                
-            { path: 'docentes',
-                loadComponent: () => import('./features/docentes/docentes.component').then(m => m.DocentesComponent), 
-                data: { breadcrumb: 'Docentes' }
+            { 
+                path: 'docentes',
+                data: { breadcrumb: 'Docentes' },
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () => import('./features/docentes/docentes.component').then(m => m.DocentesComponent)
+                    },
+                    {
+                        path: 'crear',
+                        loadComponent: () => import('./features/docentes/create-view-docentes/create-view-docentes.component').then(m => m.CreateViewDocentesComponent),
+                        data: { breadcrumb: 'Crear Docente' }
+                    },
+                    {
+                        path: ':id',
+                        loadComponent: () => import('./features/docentes/detail-view-docentes/detail-view-docentes.component').then(m => m.DetailViewDocentesComponent),
+                        data: { breadcrumb: 'Detalle Docente' }
+                    }
+                ]
             },
             { path: 'programa', 
                 loadComponent: () => import('./features/programa/programa.component').then(m => m.ProgramaComponent), 
