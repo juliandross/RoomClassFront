@@ -25,13 +25,13 @@ export class UserProfileComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService
   ) {
-    this.userForm = this.fb.group({
-      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      password2: ['', [Validators.required, Validators.minLength(6)]]
-    });
+  this.userForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    first_name: ['', Validators.required],
+    last_name: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    password2: ['', [Validators.required, Validators.minLength(6)]]
+  });
   }
 
   ngOnInit() {
