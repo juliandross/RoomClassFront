@@ -18,7 +18,13 @@ export class DocentesComponent implements OnInit {
 
   ngOnInit() {
     this.teacherService.getTeachers().subscribe({
-      next: (teachers) => this.teachers = teachers
+      next: (teachers) => {
+        // Combina nombre, apellido y teaRecentTitle en una propiedad temporal
+        this.teachers = teachers.map(t => ({
+          ...t,
+          displayName: `${t.first_name} ${t.last_name} (${t.teaRecentTitle || ''} - ${t.teaType})`
+        }));
+      }
     });
   }
 
