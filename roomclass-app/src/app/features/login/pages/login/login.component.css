@@ -1,10 +1,11 @@
 .login-container{
-    background-color: var(--primary-color);
-    height: 100vh;
+    background: url("https://simca.unicauca.edu.co/simca/resources/images/background.png") ;
+    background-size: cover;    
+    height: 100%;
 }
 .login-form{
     background-color: white;
-    width: 33%;
+    width: 400px;    
 }
 h2{
     margin: 30px 0;
@@ -18,4 +19,28 @@ hr{
 .form-group{
     margin: 10px 0;
     width: 100%;
+}
+#antorcha {
+    position: fixed;
+    background: url("https://simca.unicauca.edu.co/simca/resources/images/antorcha.png") no-repeat;
+    height: 592px;
+    right: 15%;
+    top: 0;
+    width: 251px;
+}
+#bandera {
+    background: url("https://simca.unicauca.edu.co/simca/resources/images/bandera.png") no-repeat;
+    width: 345px;
+    height: 130px;
+    position: fixed;    
+    left: 0;
+    bottom: 0;
+}
+#logoU {
+    background: url("https://simca.unicauca.edu.co/simca/resources/images/logo.png") no-repeat;
+    width: 188px;
+    height: 92px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 20px;
 }

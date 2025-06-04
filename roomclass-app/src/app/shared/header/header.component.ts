@@ -33,22 +33,20 @@ export class HeaderComponent implements OnInit {
   private buildBreadcrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
     const children: ActivatedRoute[] = route.children;
 
-    if (children.length === 0) {      
+    if (children.length === 0) {
       return breadcrumbs;
     }
 
     for (const child of children) {
-      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');      
-      if (routeURL !== 'home') {
-        url += `/${routeURL}`;
-      }
+      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+      const nextUrl = routeURL ? `${url}/${routeURL}` : url;
 
       const label = child.snapshot.data['breadcrumb'] ?? routeURL;
       if (label) {
-        breadcrumbs.push({ label, url });
+        breadcrumbs.push({ label, url: nextUrl });
       }
 
-      return this.buildBreadcrumb(child, url, breadcrumbs);
+      return this.buildBreadcrumb(child, nextUrl, breadcrumbs);
     }
 
     return breadcrumbs;

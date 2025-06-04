@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   selector: 'app-user-profile',
   standalone: true,
   templateUrl: './user-profile.component.html',
+  providers: [AuthService, UserService],
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class UserProfileComponent implements OnInit {
