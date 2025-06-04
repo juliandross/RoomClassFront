@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { SubjectService } from '../../core/services/subject.service';
-import { Subject } from '../../core/models/subject';
+import { SubjectService } from '../../../core/services/subject.service';
+import { Subject } from '../../../core/models/subject';
 import { CommonModule } from '@angular/common';
-import { GenericListComponent } from "../../shared/generic-list/generic-list.component";
-import { SubjectCreateDialogComponent } from './subject-create-dialog/subject-create-dialog.component';
+import { GenericListComponent } from "../../../shared/generic-list/generic-list.component";
+import { SubjectCreateDialogComponent } from '../subject-create-dialog/subject-create-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { SubjectUpdateDialogComponent } from './subject-update-dialog/subject-update-dialog.component';
+import { SubjectUpdateDialogComponent } from '../subject-update-dialog/subject-update-dialog.component';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-subject',
@@ -32,7 +32,7 @@ export class SubjectComponent {
   } 
 
   viewSubject(subject: Subject) {
-    this.router.navigate(['/home/asignaturas', subject.id]);
+    this.router.navigate(['home/asignaturas/view/', subject.id]);
   }
 
   deleteSubject(subject: Subject) {

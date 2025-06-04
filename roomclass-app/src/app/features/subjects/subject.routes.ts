@@ -1,18 +1,18 @@
 import { Routes } from "@angular/router";
 
-export const AssignSubjectRoutes: Routes = [
+export const SubjectRoutes: Routes = [
     {
         path: '',
         data: { breadcrumb: null },        
         children: [
             {
                 path: '',
-                loadComponent: () => import('./pages/list/assign-subject.component').then(m => m.AssignSubjectComponent),
+                loadComponent: () => import('./list/subject.component').then(m => m.SubjectComponent),
                 data: { breadcrumb: null }
             },
             {
                 path:'view/:id',
-                loadComponent: () => import('./pages/view/assign-subject-view.component').then(m => m.AssignSubjectViewComponent),
+                loadComponent: () => import('./subject-detail-view/subject-detail-view.component').then(m => m.SubjectDetailViewComponent),
                 data: { breadcrumb: 'Ver Asignación' }
             }
         ]
