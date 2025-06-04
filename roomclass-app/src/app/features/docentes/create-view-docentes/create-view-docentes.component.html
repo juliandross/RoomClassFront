@@ -30,18 +30,22 @@
   </select>
   </div>
   <div class="mb-3">
-  <label class="form-label">Tipo de Identificación</label>
-  <select class="form-select" formControlName="teaTypeId" required>
-    <option value="" disabled selected>Seleccione...</option>
-    <option value="CC">Cédula de Ciudadanía</option>
-    <option value="TI">Tarjeta de Identidad</option>
-    <option value="CE">Cédula de Extranjería</option>
-    <option value="PA">Pasaporte</option>
-    <option value="RC">Registro Civil</option>
-    <option value="NIT">NIT</option>
-    <option value="PEP">Permiso Especial de Permanencia</option>
-  </select>
-</div>
+    <label class="form-label">Tipo de Identificación</label>
+    <select class="form-select" formControlName="teaTypeId" required>
+      <option value="" disabled selected>Seleccione...</option>
+      <option value="CC">Cédula de Ciudadanía</option>
+      <option value="TI">Tarjeta de Identidad</option>
+      <option value="CE">Cédula de Extranjería</option>
+      <option value="PA">Pasaporte</option>
+      <option value="RC">Registro Civil</option>
+      <option value="NIT">NIT</option>
+      <option value="PEP">Permiso Especial de Permanencia</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Número de Identificación</label>
+    <input type="text" class="form-control" formControlName="identification" required>
+  </div>
   <div class="mb-3">
     <label class="form-label">Título Reciente</label>
     <input type="text" class="form-control" formControlName="teaRecentTitle" required>

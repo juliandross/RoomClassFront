@@ -7,8 +7,9 @@ import { AuthService } from '../auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
-  private ListApiUrl = 'http://localhost:8001/AcademApi/teacher/';
+  private ListApiUrl = 'http://localhost:8001/AcademApi/avaliableTeachers/';
   private CreateApiUrl = 'http://localhost:8001/AcademApi/teacherCreateByCoordinator/';
+  private UnactivateApiUrl = 'http://localhost:8001/AcademApi/unactivateTeacher/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -25,5 +26,15 @@ export class TeacherService {
   
   createTeacher(body: any): Observable<any> {
     return this.http.post(this.CreateApiUrl, body, {headers: this.getAuthHeaders()});
+  }
+
+  unactivateTeacher(id: number): Observable<any> {
+    const url = `${this.UnactivateApiUrl}${id}/`;
+    return this.http.patch(url, {},{ headers: this.getAuthHeaders() });
+  }
+
+  editTeacher(id: number, body: any): Observable<any> {
+    const url = `${this.CreateApiUrl}${id}/`;
+    return this.http.put(url, body, { headers: this.getAuthHeaders() });
   }
 }

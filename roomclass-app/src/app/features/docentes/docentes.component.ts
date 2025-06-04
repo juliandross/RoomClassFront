@@ -46,8 +46,27 @@ export class DocentesComponent implements OnInit {
   editTeacher(teacher: Teacher) {
     // lógica para editar
   }
-  deleteTeacher(teacher: Teacher) {
-    // lógica para eliminar
+  unactivateTeacher(teacher: Teacher) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar al docente ${teacher.first_name} ${teacher.last_name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.teacherService.unactivateTeacher(teacher.id).subscribe({
+          next: () => {
+            Swal.fire('Eliminado', 'El docente ha sido eliminado exitosamente', 'success');
+            this.refreshTeachers();
+          },
+          error: (err) => {
+            Swal.fire('Error', err.error?.detail || 'Error al eliminar el docente', 'error');
+          }
+        });
+      }
+    });
   }
   addTeacher() {
     this.modalRef = this.modalService.open(this.createDocenteModal, { size: 'lg' });

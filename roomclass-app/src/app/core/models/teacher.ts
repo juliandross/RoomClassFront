@@ -3,6 +3,7 @@ export interface Teacher {
     id: number;
     last_login: Date | null;
     email: string;
+    identification: number;
     first_name: string;
     last_name: string;
     is_active: boolean;
