@@ -5,12 +5,12 @@ import { User } from '../../core/models/user';
 import { AuthService } from '../../core/auth/auth.service';
 import { UserService } from '../../core/services/user.service';
 import Swal from 'sweetalert2';
+import { StorageService } from '../../core/services/storage-service.service';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  templateUrl: './user-profile.component.html',
-  providers: [AuthService, UserService],
+  templateUrl: './user-profile.component.html',  
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class UserProfileComponent implements OnInit {
@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private storageService: StorageService,
     private userService: UserService
   ) {
     this.userForm = this.fb.group({
@@ -36,11 +36,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-      this.authService.getProfile().subscribe({
-        next: (user) => {
-          this.user = user;
-        }
-      });
+      this.user = this.storageService.getUser();
       console.log('User profile loaded:', this.user);
   }
 

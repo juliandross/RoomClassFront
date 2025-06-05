@@ -9,13 +9,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { SubjectUpdateDialogComponent } from '../subject-update-dialog/subject-update-dialog.component';
 import Swal from 'sweetalert2';
-import { CompetenceProgramSubjectService } from '../../core/services/competence-program-subject.service';
+import { CompetenceProgramSubjectService } from '../../../core/services/competence-program-subject.service';
 
 @Component({
   selector: 'app-subject',
   standalone: true,
-  imports: [CommonModule, GenericListComponent],
-  providers: [SubjectService],
+  imports: [CommonModule, GenericListComponent],  
   templateUrl: './subject.component.html',
   styleUrl: './subject.component.css'
 })

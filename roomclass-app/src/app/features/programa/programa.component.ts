@@ -9,8 +9,7 @@ import { CompetenceMapperService } from '../../core/services/competence-mapper.s
 @Component({
   selector: 'app-program-competence-list',
   standalone: true,  
-  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent],
-  providers: [ProgramCompetenceService],
+  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent],  
   templateUrl: './programa.component.html',
 })
 export class ProgramaComponent implements OnInit {

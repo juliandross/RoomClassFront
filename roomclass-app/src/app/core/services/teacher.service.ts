@@ -14,34 +14,28 @@ export class TeacherService {
   private patchApiUrl = 'http://localhost:8001/AcademApi/patchTeacher/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  private getAuthHeaders(): HttpHeaders {
-    const token = this.authService.getToken();
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-  }
 
   getTeachers(): Observable<Teacher[]> {
-    return this.http.get<Teacher[]>(this.ListApiUrl, { headers: this.getAuthHeaders() });
+    return this.http.get<Teacher[]>(this.ListApiUrl);
   }
 
   
   createTeacher(body: any): Observable<any> {
-    return this.http.post(this.CreateApiUrl, body, {headers: this.getAuthHeaders()});
+    return this.http.post(this.CreateApiUrl, body);
   }
 
   unactivateTeacher(id: number): Observable<any> {
     const url = `${this.UnactivateApiUrl}${id}/`;
-    return this.http.patch(url, {},{ headers: this.getAuthHeaders() });
+    return this.http.patch(url, {});
   }
 
   editTeacher(id: number, body: any): Observable<any> {
     const url = `${this.patchApiUrl}${id}/`;
-    return this.http.patch(url, body, { headers: this.getAuthHeaders() });
+    return this.http.patch(url, body);
   }
 
   getTeacherById(id: number): Observable<Teacher> {
     const url = `${this.ViewApiUrl}${id}/`;
-    return this.http.get<any>(url, { headers: this.getAuthHeaders() })
+    return this.http.get<any>(url)
   }
 }

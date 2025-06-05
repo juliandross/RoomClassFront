@@ -11,7 +11,6 @@ import { CompetenceMapperService, CompetenceWrapper } from '../../../../core/ser
   selector: 'app-assign-subject-view',
   standalone: true,
   imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent],
-  providers: [AssignSubjectService, SubjectCompetenceService],
   templateUrl: './assign-subject-view.component.html',
   styleUrl: './assign-subject-view.component.css'
 })

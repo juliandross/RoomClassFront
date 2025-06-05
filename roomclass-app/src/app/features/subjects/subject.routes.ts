@@ -13,7 +13,7 @@ export const SubjectRoutes: Routes = [
             {
                 path:'view/:id',
                 loadComponent: () => import('./subject-detail-view/subject-detail-view.component').then(m => m.SubjectDetailViewComponent),
-                data: { breadcrumb: 'Ver Asignación' }
+                data: { breadcrumb: 'Ver Asignatura' }
             }
         ]
     }

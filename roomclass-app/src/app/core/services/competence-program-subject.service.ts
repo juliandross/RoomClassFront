@@ -10,16 +10,9 @@ export class CompetenceProgramSubjectService {
     private urlApi = 'http://localhost:8001/AcademApi/competenceProgramSubject/';
 
     constructor(private httpClient: HttpClient, private authService: AuthService) {}
-
-    private getAuthHeaders(): HttpHeaders {
-        const token = this.authService.getToken();
-        return new HttpHeaders({
-            Authorization: `Bearer ${token}`
-        });
-    }
-
+   
     postCompetenceProgramSubject(programCompetence: number, subject: number): Observable<CompetenceProgramSubject> {
         const body = { programCompetence, subject };
-        return this.httpClient.post<CompetenceProgramSubject>(this.urlApi, body, { headers: this.getAuthHeaders() });
+        return this.httpClient.post<CompetenceProgramSubject>(this.urlApi, body);
     }
 }

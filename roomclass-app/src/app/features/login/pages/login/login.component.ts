@@ -4,20 +4,19 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../core/auth/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { StorageService } from '../../../../core/services/storage-service.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],  
-  providers: [AuthService],
+  imports: [ReactiveFormsModule],    
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
   loginForm:FormGroup;  
   //Initializes the login form with FormBuilder
-  constructor(private fb: FormBuilder,private router: Router, private authService: AuthService) {
+  constructor(private fb: FormBuilder,private router: Router, private authService: AuthService, private storage: StorageService) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -48,6 +47,7 @@ export class LoginComponent {
       }).then(() => {        
         this.authService.getProfile().subscribe({
           next:(user)=>{
+            this.storage.saveUser(user);
             this.router.navigate(['/home']);
           }
         });      
