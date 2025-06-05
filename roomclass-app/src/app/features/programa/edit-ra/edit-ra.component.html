@@ -7,15 +7,6 @@
       <label>Descripción</label>
       <input name="description" [(ngModel)]="ra.proRADescription" required />
     </div>
-    <div class="form-group">
-      <label>Nivel</label>
-      <select name="level" [(ngModel)]="ra.id" required>
-        <option value="" disabled>Seleccione un nivel</option>
-        <option value="Básico">Básico</option>
-        <option value="Intermedio">Intermedio</option>
-        <option value="Avanzado">Avanzado</option>
-      </select>
-    </div>
     <div class="modal-footer">
       <button type="button" class="cancel" (click)="onCancel()">Cancelar</button>
       <button type="button" class="save" [disabled]="!editForm.form.valid" (click)="onSave()">Guardar</button>
