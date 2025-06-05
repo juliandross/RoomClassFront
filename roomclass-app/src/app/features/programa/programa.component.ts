@@ -6,14 +6,13 @@ import Swal from 'sweetalert2';
 import { GenericViewCompetencesComponent } from "../../shared/generic-view-competences/generic-view-competences/generic-view-competences.component";
 import { CompetenceMapperService } from '../../core/services/competence-mapper.service';
 import { CreateCompProgramaComponent } from './create-comp-programa/create-comp-programa.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-program-competence-list',
   standalone: true,  
   imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent,    
-     MatDialogModule,
-    CreateCompProgramaComponent],  
+    CreateCompProgramaComponent], 
+     
   templateUrl: './programa.component.html',
 })
 export class ProgramaComponent implements OnInit {
@@ -21,7 +20,7 @@ export class ProgramaComponent implements OnInit {
   item: any;
   constructor(private programCompetenceService: ProgramCompetenceService,
     private competenceMapper:CompetenceMapperService,
-    private dialog: MatDialog) {}
+    private modalService: NgbModal) {}
 
   ngOnInit() {
     this.item = {
@@ -41,18 +40,27 @@ export class ProgramaComponent implements OnInit {
     });
   }
 
+  
   addCompetence() {
-    const dialogRef = this.dialog.open(CreateCompProgramaComponent, {
-      width: '500px', // ajusta el tamaño si lo necesitas
-      data: {} // puedes pasar datos si lo necesitas
+    const modalRef = this.modalService.open(CreateCompProgramaComponent, {
+      size: 'lg', // o 'md', según prefieras
+      centered: true,
+      backdrop: 'static'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    modalRef.result.then((result) => {
       if (result) {
-        // Aquí puedes refrescar la lista o hacer algo con el resultado
-        this.ngOnInit();
+        this.programCompetenceService.createProgramCompetence(result).subscribe({
+          next: (created) => {
+            this.competences.push(this.competenceMapper.mapProgramCompetenceToCompetenceWrapper(created));
+            Swal.fire('Competencia creada', 'La competencia fue creada con éxito', 'success');
+          },
+          error: () => {
+            Swal.fire('Error', 'No se pudo crear la competencia', 'error');
+          }
+        });
       }
-    });
+    }).catch(() => {});
   }
   editCompetence(competence: any) {
     // Aquí puedes abrir un modal o redirigir a una página de edición
@@ -64,6 +72,22 @@ export class ProgramaComponent implements OnInit {
     console.log('Competencia seleccionada:', competence);
     // Por ejemplo, puedes mostrar las RA asociadas:
     // competence.RA_Program
+  }
+
+  onAddRA(competenceId: number) {
+    // Lógica para crear RA
+  }
+
+  onEditRA(raId: number) {
+    // Lógica para editar RA
+  }
+
+  onDeleteRA(raId: number) {
+    // Lógica para eliminar RA
+  }
+
+  onViewRA(raId: number) {
+    // Lógica para mostrar RA
   }
   deleteCompetence(competence: any) {
     const competenceId = competence.id; 

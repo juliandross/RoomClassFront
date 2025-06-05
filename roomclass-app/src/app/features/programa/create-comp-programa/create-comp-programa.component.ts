@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProgramCompetence } from '../../../core/models/ProgramCompetence';
 
 @Component({
@@ -17,13 +17,13 @@ export class CreateCompProgramaComponent {
     proCompLevel: ''
   };
 
-  constructor(private dialogRef: MatDialogRef<CreateCompProgramaComponent>) {}
+  constructor(public activeModal: NgbActiveModal) {}
 
   onSave() {
-    this.dialogRef.close(this.competence);
+    this.activeModal.close(this.competence);
   }
 
   onCancel() {
-    this.dialogRef.close();
+    this.activeModal.dismiss();
   }
 }
