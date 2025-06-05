@@ -8,6 +8,7 @@ import { CompetenceMapperService } from '../../core/services/competence-mapper.s
 import { CreateCompProgramaComponent } from './create-comp-programa/create-comp-programa.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditCompProgramaComponent } from './edit-comp-programa/edit-comp-programa.component';
+import { ProgramRAService } from '../../core/services/ProgramRA.service';
 @Component({
   selector: 'app-program-competence-list',
   standalone: true,  
@@ -19,6 +20,7 @@ export class ProgramaComponent implements OnInit {
   competences: any[] = [];
   item: any;
   constructor(private programCompetenceService: ProgramCompetenceService,
+    private ProgramRAService: ProgramRAService,
     private competenceMapper:CompetenceMapperService,
     private modalService: NgbModal) {}
 
@@ -111,7 +113,26 @@ export class ProgramaComponent implements OnInit {
   }
 
   onDeleteRA(raId: number) {
-    // Lógica para eliminar RA
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Deseas eliminar esta RA del programa?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ProgramRAService.deleteProgramRA(raId).subscribe({
+          next: () => {
+            Swal.fire('Eliminado', 'La RA ha sido eliminada.', 'success');
+            this.ngOnInit(); // Refresca la lista
+          },
+          error: (err) => {
+            Swal.fire('Error', 'No se pudo eliminar la RA - La RA no existe.', 'error');
+          }
+        });
+      }
+    })
   }
 
   onViewRA(raId: number) {
