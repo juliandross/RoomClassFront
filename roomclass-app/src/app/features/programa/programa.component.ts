@@ -90,8 +90,8 @@ export class ProgramaComponent implements OnInit {
   onViewRA(raId: number) {
     // Lógica para mostrar RA
   }
-  deleteCompetence(competence: any) {
-    const competenceId = competence.id; 
+  deleteCompetence(competenceId: number) {
+    console.log('Eliminar competencia con ID:', competenceId);
     Swal.fire({
       title: '¿Estás seguro?',
       text: '¿Deseas eliminar esta competencia del programa?',
