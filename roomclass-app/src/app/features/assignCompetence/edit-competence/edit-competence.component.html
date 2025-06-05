@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h3 class="modal-title">Editar Competencia de la Materia</h3>
+</div>
+<div class="modal-body">
+  <form #editForm="ngForm">
+    <div class="form-group">
+      <label>Competencia de Programa</label>
+      <select name="programCompetence" [(ngModel)]="selectedProgramCompetenceId" required>
+        <option [ngValue]="null" disabled>Seleccione una competencia</option>
+        <option *ngFor="let pc of programCompetences" [ngValue]="pc.id">
+          {{ pc.proCompDescription }} ({{ pc.proCompLevel }})
+        </option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      <button type="button" class="btn btn-primary" [disabled]="!editForm.form.valid" (click)="onSave()">Guardar</button>
+    </div>
+  </form>
+</div>
