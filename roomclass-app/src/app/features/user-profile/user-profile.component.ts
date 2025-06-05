@@ -36,8 +36,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-      this.user = this.storageService.getUser();
-      console.log('User profile loaded:', this.user);
+      this.user = this.storageService.getUser();      
   }
 
   onSubmit() {
