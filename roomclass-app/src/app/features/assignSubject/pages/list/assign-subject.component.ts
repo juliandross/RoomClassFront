@@ -23,6 +23,7 @@ import { StorageService } from '../../../../core/services/storage-service.servic
   styleUrl: './assign-subject.component.css'
 })
 export class AssignSubjectComponent {
+
 assignSubjects: AssignSubject[] = [];
 assignSubjectFull!: AssignSubject;
 subject!: Subject;
@@ -57,6 +58,9 @@ constructor(private assignSubjectService: AssignSubjectService,private router:Ro
       })
     }
     
+  }
+  isCoordinator(): boolean {
+    return this.isCoordinador;
   }
   viewAssignSubject(assignSubject: AssignSubject) {
     this.router.navigate(['home/asignar_materia/view/', assignSubject.id]);

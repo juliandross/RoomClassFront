@@ -4,6 +4,7 @@
   [items]="assignSubjects"
   [showViewButton]="true"
   [showEditButton]="false"
+  [isCoordinator]="isCoordinator()"
   (onAdd)="addAssignSubject()"
   (onEdit)="editAssignSubject($event)"
   (onDelete)="deleteAssignSubject($event)"

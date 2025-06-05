@@ -54,4 +54,8 @@ export class StorageService {
   public isAuthenticated(): boolean {
     return !!this.getToken(); // Si hay token, el usuario está "autenticado"
   }
+  public isCoordinador(): boolean {
+    const user = this.getUser();
+    return user && user.role === 'coordinador'; // Verifica si el rol del usuario es 'coordinador'
+  }
 }
