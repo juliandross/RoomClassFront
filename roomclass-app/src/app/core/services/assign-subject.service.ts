@@ -57,6 +57,10 @@ export class AssignSubjectService {
       )
     );
 }
+
+  deleteRA(raId: number): Observable<void> {
+    return this.httpClient.delete<void>(`http://localhost:8001/AcademApi/subjectRA/${raId}/`);
+  }
 }
 
 

@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <h3 class="modal-title">Agregar Competencia a la Materia</h3>
+</div>
+<div class="modal-body">
+  <form #addForm="ngForm">
+    <div class="form-group mb-2">
+      <label>Descripción de la Competencia</label>
+      <input
+        type="text"
+        class="form-control"
+        name="compDescription"
+        [(ngModel)]="compDescription"
+        required
+        placeholder="Descripción de la competencia"
+      />
+    </div>
+    <div class="form-group mb-2">
+        <label>Nivel de la Competencia</label>
+        <select
+            name="compLevel"
+            class="form-control"
+            [(ngModel)]="compLevel"
+            required
+        >
+            <option [ngValue]="null" disabled>Seleccione un nivel</option>
+            <option *ngFor="let level of competenceLevels" [ngValue]="level">
+            {{ level }}
+            </option>
+        </select>
+        
+    </div>
+    <div class="form-group mb-2">
+      <label>Competencia de Programa</label>
+      <select
+        name="programCompetence"
+        class="form-control"
+        [(ngModel)]="selectedProgramCompetenceId"
+        required
+      >
+        <option [ngValue]="null" disabled>Seleccione una competencia</option>
+        <option *ngFor="let pc of programCompetences" [ngValue]="pc.id">
+          {{ pc.proCompDescription }} ({{ pc.proCompLevel }})
+        </option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="!addForm.form.valid"
+        (click)="onSave()"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

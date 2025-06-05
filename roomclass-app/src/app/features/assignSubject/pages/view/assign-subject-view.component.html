@@ -5,7 +5,14 @@
 <app-generic-view-competences
     [competencesWrapper]="competences"
     [assignSubjectView]="true"
-    (onViewRA)="viewRA($event)">
+    (onViewRA)="viewRA($event)"
+    (onAddCompetence)="addCompetence()"
+    (onAddRA)="addRA($event)"
+    (onEditRA)="editRA($event)"
+    (onDeleteRA)="deleteRA($event)"
+    (onDeleteCompetence)="deleteCompetence($event)"
+    (onEditCompetence)="editCompetence($event)"
+    >
 </app-generic-view-competences>
 
 
