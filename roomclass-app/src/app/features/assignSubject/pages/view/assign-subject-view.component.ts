@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { GenericViewDetailsComponent } from "../../../../shared/generic-view-details/generic-view-details.component";
 import { AssignSubjectService } from '../../../../core/services/assign-subject.service';
 import { SubjectCompetenceService } from '../../../../core/services/subject-competence.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { GenericViewCompetencesComponent } from "../../../../shared/generic-view-competences/generic-view-competences/generic-view-competences.component";
 import { CompetenceMapperService, CompetenceWrapper } from '../../../../core/services/competence-mapper.service';
 
@@ -10,7 +10,7 @@ import { CompetenceMapperService, CompetenceWrapper } from '../../../../core/ser
 @Component({
   selector: 'app-assign-subject-view',
   standalone: true,
-  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent],
+  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent,RouterModule],
   templateUrl: './assign-subject-view.component.html',
   styleUrl: './assign-subject-view.component.css'
 })
@@ -21,11 +21,12 @@ export class AssignSubjectViewComponent {
     private assignSubjectService:AssignSubjectService,
     private subjectCompetenceService: SubjectCompetenceService,
     private competenceMapper: CompetenceMapperService,
+    private router: Router,
     private route: ActivatedRoute) { }
-  ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.assignSubjectService.getAssignSubjectById(+id).subscribe({
+    id = this.route.snapshot.paramMap.get('id');
+  ngOnInit() {    
+    if (this.id) {
+      this.assignSubjectService.getAssignSubjectById(+this.id).subscribe({
         next: (assignSubject) => {          
           this.item ={
             Materia: assignSubject.subject.subjectName,
@@ -53,5 +54,8 @@ export class AssignSubjectViewComponent {
       });
     }
   }
+  viewRA(raId: number) {    
+    this.router.navigate(['home/asignar_materia/view/', this.id, 'viewRA', raId]);    
+  }  
 
 }

@@ -46,10 +46,12 @@ export class SubjectComponent {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      this.subjectService.deleteSubject(subject.id, subject).subscribe({
+      this.subjectService.deleteSubject(subject.id).subscribe({
         next: () => {
           this.subjects = this.subjects.filter(s => s.id !== subject.id);
           Swal.fire('Eliminado', 'La asignatura ha sido eliminada.', 'success');
+          //REFRESH
+          this.ngOnInit();
         },
         error: (error) => {
           console.error('Error deleting subject:', error);
@@ -81,6 +83,7 @@ export class SubjectComponent {
               this.competenceProgramSubjectService.postCompetenceProgramSubject(programCompetencesIds[i], updated.id).subscribe({
                 next: (asociada) => {
                   console.log('Competencia asociada:', asociada);
+                  this.ngOnInit();
                 },
                 error: (error) => {
                   console.error('Error associating competence:', error);
@@ -120,6 +123,7 @@ export class SubjectComponent {
               this.competenceProgramSubjectService.postCompetenceProgramSubject(programCompetencesIds[i], created.id).subscribe({
                 next: (asociada) => {
                   console.log('Competencia asociada:', asociada);
+                  this.ngOnInit();
                 },
                 error: (error) => {
                   console.error('Error associating competence:', error);

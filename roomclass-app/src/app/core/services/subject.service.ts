@@ -8,10 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class SubjectService {
   private apiUrl = 'http://localhost:8001/AcademApi/subject/';
+  private baseUrl = 'http://localhost:8001/AcademApi/';  
   constructor(private httpClient: HttpClient) {} 
 
   getSubjects(): Observable<Subject[]> {
-    return this.httpClient.get<Subject[]>(this.apiUrl);
+    return this.httpClient.get<Subject[]>(`${this.baseUrl}listAvailableSubjects/`);
   }
 
   postSubject(subject: Subject): Observable<Subject> {
@@ -22,9 +23,8 @@ export class SubjectService {
     return this.httpClient.put<Subject>(`${this.apiUrl}${id}/`, subject);
   }
 
-  deleteSubject(id: Number, subject: Subject): Observable<void> {
-    subject.is_active = false;
-    return this.httpClient.put<void>(`${this.apiUrl}${id}/`, subject);
+  deleteSubject(id: Number): Observable<void> {
+    return this.httpClient.patch<void>(`${this.apiUrl}${id}/`,{});
   }
 
   viewSubject(id: Number): Observable<Subject> {
@@ -33,5 +33,9 @@ export class SubjectService {
 
   editSubject(id: Number, subject: Subject): Observable<Subject> {
     return this.httpClient.put<Subject>(`${this.apiUrl}${id}/`, subject);
+  }
+
+  getSubjectById(id: number): Observable<Subject>{
+     return this.httpClient.get<Subject>(`${this.apiUrl}${id}/`); 
   }
 }

@@ -31,7 +31,9 @@
         <div class="border-top mt-3 pt-3">
           <div class="d-flex justify-content-between align-items-center mb-2">
             <h5>Resultados de Aprendizaje</h5>
-            <button class="btn btn-primary" [disabled]="getLimitRA(competenceWrapper)">Crear RA</button>                        
+            <button class="btn btn-primary" [disabled]="getLimitRA(competenceWrapper)" (click)="onAddRA.emit(competenceWrapper.competence.id)">
+              Crear RA
+            </button>                        
           </div>          
           <div class="alert alert-info" *ngIf="competenceWrapper.ras.length === 0">
             No hay RA registrados.          
@@ -40,7 +42,7 @@
             <li *ngFor="let ra of competenceWrapper.ras" class="list-group-item d-flex justify-content-between align-items-center">
               <span>{{ra.description}}</span>
               <div>
-                <button title="Mostrar RA" class="btn btn-primary me-2" (click)="onViewRA.emit(ra.id)">
+                <button title="Mostrar RA" class="btn btn-primary me-2" (click)="onViewRA.emit(ra.id)" *ngIf="!programView">
                     <i class="fa-solid fa-eye"></i>
                 </button>
                 <button title="Editar RA" class="btn btn-secondary me-2" (click)="onEditRA.emit(ra.id)">

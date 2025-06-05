@@ -8,6 +8,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-docentes',
   templateUrl: './docentes.component.html',
@@ -18,7 +19,7 @@ import Swal from 'sweetalert2';
 export class DocentesComponent implements OnInit {
   teachers: Teacher[] = [];
   modalRef?: NgbModalRef;
-  constructor(private teacherService: TeacherService, private modalService: NgbModal, private router: Router) {}
+  constructor(private teacherService: TeacherService, private modelService: NgbModal, private router: Router) {}
   @ViewChild('createDocenteModal') createDocenteModal!: TemplateRef<any>;
   ngOnInit() {
     this.teacherService.getTeachers().subscribe({
@@ -70,7 +71,7 @@ export class DocentesComponent implements OnInit {
     });
   }
   addTeacher() {
-    this.modalRef = this.modalService.open(this.createDocenteModal, { size: 'lg' });
+    this.modalRef = this.modelService.open(this.createDocenteModal, { size: 'lg' });
   }
   showSuccessSnack() {
     Swal.fire({
