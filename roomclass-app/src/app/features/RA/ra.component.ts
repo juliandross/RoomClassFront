@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GenericViewDetailsComponent } from '../../shared/generic-view-details/generic-view-details.component';
 import { AssignSubjectService } from '../../core/services/assign-subject.service';
+import { RubricComponent } from "../rubric/rubric.component";
 
 @Component({
   selector: 'app-ra',
   standalone: true,
-  imports: [GenericViewDetailsComponent],
+  imports: [GenericViewDetailsComponent, RubricComponent],
   templateUrl: './ra.component.html',
   styleUrl: './ra.component.css'
 })
