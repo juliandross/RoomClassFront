@@ -46,7 +46,7 @@ export class SubjectComponent {
     cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      this.subjectService.deleteSubject(subject.id, subject).subscribe({
+      this.subjectService.deleteSubject(subject.id).subscribe({
         next: () => {
           this.subjects = this.subjects.filter(s => s.id !== subject.id);
           Swal.fire('Eliminado', 'La asignatura ha sido eliminada.', 'success');
