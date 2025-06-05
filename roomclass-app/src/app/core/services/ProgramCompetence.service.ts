@@ -8,7 +8,7 @@ export class ProgramCompetenceService {
   private apiRAAsociatedUrl = 'http://localhost:8001/AcademApi/programCompetence/RA_asociated/';
   private deleteUrl = 'http://localhost:8001/AcademApi/programCompetence/';
   private createUrl = 'http://localhost:8001/AcademApi/programCompetence/';
-  
+  private patchUrl = 'http://localhost:8001/AcademApi/programCompetence/';
   constructor(private http: HttpClient) {}
   
 
@@ -23,5 +23,10 @@ export class ProgramCompetenceService {
   deleteProgramCompetence(id: number): Observable<any> {
     const url = `${this.deleteUrl}${id}/`;
     return this.http.delete(url);
+  }
+
+  updateProgramCompetence(id: number, programCompetence: ProgramCompetenceRAResponse): Observable<ProgramCompetenceRAResponse> {
+    const url = `${this.patchUrl}${id}/`;
+    return this.http.patch<ProgramCompetenceRAResponse>(url, programCompetence);
   }
 }

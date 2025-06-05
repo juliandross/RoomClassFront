@@ -7,6 +7,7 @@ import { GenericViewCompetencesComponent } from "../../shared/generic-view-compe
 import { CompetenceMapperService } from '../../core/services/competence-mapper.service';
 import { CreateCompProgramaComponent } from './create-comp-programa/create-comp-programa.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditCompProgramaComponent } from './edit-comp-programa/edit-comp-programa.component';
 @Component({
   selector: 'app-program-competence-list',
   standalone: true,  
@@ -63,10 +64,36 @@ export class ProgramaComponent implements OnInit {
       }
     }).catch(() => {});
   }
-  editCompetence(competence: any) {
-    // Aquí puedes abrir un modal o redirigir a una página de edición
-    console.log('Editar competencia:', competence);
-    // Por ejemplo, podrías abrir un modal para editar la competencia seleccionada
+  editCompetence(competenceId: number) {
+    // Busca el objeto competencia en el array
+    const competenceWrapper = this.competences.find(c => c.competence.id === competenceId);
+    if (!competenceWrapper) {
+      Swal.fire('Error', 'No se encontró la competencia', 'error');
+      return;
+    }
+
+    // Pasa una copia del objeto competencia al modal
+    const modalRef = this.modalService.open(EditCompProgramaComponent, {
+      size: 'lg',
+      centered: true,
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.competence = { ...competenceWrapper.competence };
+
+    modalRef.result.then((result) => {
+      if (result) {
+        this.programCompetenceService.updateProgramCompetence(result.id, result).subscribe({
+          next: (updated) => {
+            Swal.fire('Competencia actualizada', 'La competencia fue actualizada con éxito', 'success')
+              .then(() => this.ngOnInit());
+          },
+          error: (err) => {
+            err = err.error || err;
+            Swal.fire('Error', err.message || err.detail || 'Error desconocido', 'error');
+          }
+        });
+      }
+    }).catch(() => {});
   }
   viewCompetence(competence: any) {
     // Aquí puedes mostrar un modal, navegar a detalles, etc.
