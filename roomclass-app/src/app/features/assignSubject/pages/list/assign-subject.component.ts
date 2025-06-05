@@ -57,6 +57,7 @@ constructor(private assignSubjectService: AssignSubjectService,private router:Ro
             next: () => {
               this.assignSubjects = this.assignSubjects.filter(s=> s.id !== assignSubject.id);
               Swal.fire('Eliminada', 'La asignacion ha sido eliminada.', 'success');
+              this.ngOnInit();
             },
             error: (error) => {
               console.error('Error deleting subject:', error);
@@ -85,6 +86,7 @@ constructor(private assignSubjectService: AssignSubjectService,private router:Ro
             this.assignSubjects.push(assignSubject);
             console.log('Asignación creada:', assignSubject);
             Swal.fire('Nueva delegación de asignatura', `Asignatura delegada con éxito`, 'success');
+            this.ngOnInit();
           },
           error: (error) => {
             console.error('Error delegation subject:', error);
