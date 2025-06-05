@@ -11,7 +11,6 @@ import { EditCompProgramaComponent } from './edit-comp-programa/edit-comp-progra
 import { ProgramRAService } from '../../core/services/ProgramRA.service';
 import { AddRaComponent } from './add-ra/add-ra.component';
 import { EditRaComponent } from './edit-ra/edit-ra.component';
-import { ViewRaComponent } from './view-ra/view-ra.component';
 import { RAProgram } from '../../core/models/RAProgram';
 @Component({
   selector: 'app-program-competence-list',
@@ -101,7 +100,6 @@ export class ProgramaComponent implements OnInit {
       }
     }).catch(() => {});
   }
-
   onAddRA(competenceId: number) {
     const modalRef = this.modalService.open(AddRaComponent, {
       size: 'lg',
@@ -112,7 +110,18 @@ export class ProgramaComponent implements OnInit {
 
     modalRef.result.then((result) => {
       if (result) {
-        this.ProgramRAService.createProgramRA(result).subscribe({
+        // Busca el objeto competencia en el array
+        const competenceWrapper = this.competences.find(c => c.competence.id === competenceId);
+        if (!competenceWrapper) {
+          Swal.fire('Error', 'No se encontró la competencia', 'error');
+          return;
+        }
+        // Crea el objeto RA con el objeto competencia
+        const raToSend = {
+          ...result,
+          programCompetence: competenceWrapper.competence.id
+        };
+        this.ProgramRAService.createProgramRA(raToSend).subscribe({
           next: () => {
             Swal.fire('RA creada', 'La RA fue creada con éxito', 'success')
               .then(() => this.ngOnInit());
@@ -124,7 +133,6 @@ export class ProgramaComponent implements OnInit {
       }
     }).catch(() => {});
   }
-
   onEditRA(raId: number) {
     // Buscar el objeto RA en el array de competencias
     let raObj: RAProgram | undefined;
@@ -156,24 +164,6 @@ export class ProgramaComponent implements OnInit {
         });
       }
     }).catch(() => {});
-  }
-
-  onViewRA(raId: number) {
-    let raObj: RAProgram | undefined;
-    for (const comp of this.competences) {
-      raObj = comp.ras.find((ra: RAProgram) => ra.id === raId);
-      if (raObj) break;
-    }
-    if (!raObj) {
-      Swal.fire('Error', 'No se encontró la RA', 'error');
-      return;
-    }
-    const modalRef = this.modalService.open(ViewRaComponent, {
-      size: 'md',
-      centered: true,
-      backdrop: 'static'
-    });
-    modalRef.componentInstance.ra = raObj;
   }
 
   onDeleteRA(raId: number) {

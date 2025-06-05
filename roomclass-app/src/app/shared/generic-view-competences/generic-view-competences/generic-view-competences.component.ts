@@ -23,7 +23,7 @@ export class GenericViewCompetencesComponent {
   @Output() onDeleteCompetence = new EventEmitter<any>();
 
   getLimitRA(competence:CompetenceWrapper): boolean{    
-    if(this.programView && competence.ras.length > 1){      
+    if(this.programView && competence.ras.length >= 1){      
       return true;
     }
   return false;
