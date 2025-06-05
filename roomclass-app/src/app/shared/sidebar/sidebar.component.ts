@@ -21,8 +21,7 @@ export class SidebarComponent {
   // This method is called when the component is initialized, it obtains the user credentials
   ngOnInit() {
       this.user = this.storageService.getUser();
-      this.isCoordinador = !!this.user && (this.user.rol || '').trim().toUpperCase() === 'COORDINADOR';
-      console.log('User profile loaded:', this.user);
+      this.isCoordinador = !!this.user && (this.user.rol || '').trim().toUpperCase() === 'COORDINADOR';      
     }
   logout() {
     this.authService.logout();    

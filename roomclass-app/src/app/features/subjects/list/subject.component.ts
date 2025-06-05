@@ -20,7 +20,7 @@ import { CompetenceProgramSubjectService } from '../../../core/services/competen
 })
 export class SubjectComponent {
   subjects: Subject[] = [];
-  constructor(private subjectService: SubjectService, private dialog: MatDialog, private router: Router, private modalService: NgbModal, private competenceProgramSubjectService: CompetenceProgramSubjectService ) { }
+  constructor(private subjectService: SubjectService, private router: Router, private modalService: NgbModal, private competenceProgramSubjectService: CompetenceProgramSubjectService ) { }
   ngOnInit() {
     this.subjectService.getSubjects().subscribe({
       next: (subjects) => {
@@ -50,6 +50,8 @@ export class SubjectComponent {
         next: () => {
           this.subjects = this.subjects.filter(s => s.id !== subject.id);
           Swal.fire('Eliminado', 'La asignatura ha sido eliminada.', 'success');
+          //REFRESH
+          this.ngOnInit();
         },
         error: (error) => {
           console.error('Error deleting subject:', error);
@@ -81,6 +83,7 @@ export class SubjectComponent {
               this.competenceProgramSubjectService.postCompetenceProgramSubject(programCompetencesIds[i], updated.id).subscribe({
                 next: (asociada) => {
                   console.log('Competencia asociada:', asociada);
+                  this.ngOnInit();
                 },
                 error: (error) => {
                   console.error('Error associating competence:', error);
@@ -120,6 +123,7 @@ export class SubjectComponent {
               this.competenceProgramSubjectService.postCompetenceProgramSubject(programCompetencesIds[i], created.id).subscribe({
                 next: (asociada) => {
                   console.log('Competencia asociada:', asociada);
+                  this.ngOnInit();
                 },
                 error: (error) => {
                   console.error('Error associating competence:', error);

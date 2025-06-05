@@ -15,6 +15,9 @@ body{
     --secondary-color: #0d4185;    
     --third-color:#e5e9e9;
 }
+.modal-header{
+  background-color: var(--primary-color) !important;    
+}
 img {
   max-width: 100%;
   height: auto;

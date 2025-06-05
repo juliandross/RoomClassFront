@@ -4,5 +4,11 @@
 </app-generic-view-details>
 <app-generic-view-competences
   [competencesWrapper]="competences"
-  [programView] = "true">
+  [programView]="true"
+  (onAddCompetence)="addCompetence()"
+  (onEditCompetence)="editCompetence($event)"
+  (onDeleteCompetence)="deleteCompetence($event)"
+  (onAddRA)="onAddRA($event)"
+  (onEditRA)="onEditRA($event)"
+  (onDeleteRA)="onDeleteRA($event)">
 </app-generic-view-competences>
