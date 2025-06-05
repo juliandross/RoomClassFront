@@ -5,17 +5,23 @@ import { GenericViewDetailsComponent } from '../../shared/generic-view-details/g
 import Swal from 'sweetalert2';
 import { GenericViewCompetencesComponent } from "../../shared/generic-view-competences/generic-view-competences/generic-view-competences.component";
 import { CompetenceMapperService } from '../../core/services/competence-mapper.service';
+import { CreateCompProgramaComponent } from './create-comp-programa/create-comp-programa.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-program-competence-list',
   standalone: true,  
-  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent],  
+  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent,    
+     MatDialogModule,
+    CreateCompProgramaComponent],  
   templateUrl: './programa.component.html',
 })
 export class ProgramaComponent implements OnInit {
   competences: any[] = [];
   item: any;
-  constructor(private programCompetenceService: ProgramCompetenceService,private competenceMapper:CompetenceMapperService) {}
+  constructor(private programCompetenceService: ProgramCompetenceService,
+    private competenceMapper:CompetenceMapperService,
+    private dialog: MatDialog) {}
 
   ngOnInit() {
     this.item = {
@@ -35,10 +41,18 @@ export class ProgramaComponent implements OnInit {
     });
   }
 
-  addCompetence(competence: any){
-    // Aquí puedes abrir un modal o redirigir a una página de creación
-    console.log('Agregar competencia');
-    // Por ejemplo, podrías abrir un modal para crear una nueva competencia
+  addCompetence() {
+    const dialogRef = this.dialog.open(CreateCompProgramaComponent, {
+      width: '500px', // ajusta el tamaño si lo necesitas
+      data: {} // puedes pasar datos si lo necesitas
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Aquí puedes refrescar la lista o hacer algo con el resultado
+        this.ngOnInit();
+      }
+    });
   }
   editCompetence(competence: any) {
     // Aquí puedes abrir un modal o redirigir a una página de edición
