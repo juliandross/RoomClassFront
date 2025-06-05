@@ -1,5 +1,4 @@
-
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,22 +12,31 @@ import { CompetenceProgramSubject } from '../../../core/models/competence-progra
   templateUrl: './edit-competence.component.html',
   styleUrl: './edit-competence.component.css'
 })
-export class EditSubjectCompetenceComponent {
+export class EditSubjectCompetenceComponent implements OnInit {
   @Input() programCompetences: ProgramCompetence[] = [];
   @Input() subjectCompetence!: CompetenceProgramSubject;
 
   selectedProgramCompetenceId: number | null = null;
+  compDescription: string = '';
+  compLevel: string = '';
+  competenceLevels: string[] = ['Básico', 'Intermedio', 'Avanzado'];
 
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
     this.selectedProgramCompetenceId = this.subjectCompetence.programCompetence;
+    this.compDescription = (this.subjectCompetence as any).compDescription || '';
+    this.compLevel = (this.subjectCompetence as any).compLevel || '';
+    console.log('Subject Competence:', this.subjectCompetence);
+    console.log('Selected Program Competence ID:', this.selectedProgramCompetenceId);
   }
 
   onSave() {
-    if (this.selectedProgramCompetenceId) {
+    if (this.compDescription && this.compLevel && this.selectedProgramCompetenceId) {
       this.activeModal.close({
-        ...this.subjectCompetence,
+        id: this.subjectCompetence.id, 
+        compDescription: this.compDescription,
+        compLevel: this.compLevel,
         programCompetence: this.selectedProgramCompetenceId
       });
     }

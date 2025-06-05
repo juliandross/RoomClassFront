@@ -15,15 +15,19 @@
       />
     </div>
     <div class="form-group mb-2">
-      <label>Nivel de la Competencia</label>
-      <input
-        type="text"
-        class="form-control"
-        name="compLevel"
-        [(ngModel)]="compLevel"
-        required
-        placeholder="Nivel de la competencia"
-      />
+        <label>Nivel de la Competencia</label>
+        <select
+            name="compLevel"
+            class="form-control"
+            [(ngModel)]="compLevel"
+            required
+        >
+            <option [ngValue]="null" disabled>Seleccione un nivel</option>
+            <option *ngFor="let level of competenceLevels" [ngValue]="level">
+            {{ level }}
+            </option>
+        </select>
+        
     </div>
     <div class="form-group mb-2">
       <label>Competencia de Programa</label>

@@ -34,8 +34,21 @@ export class SubjectCompetenceService {
   deleteSubjectCompetence(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiCompetencesUrl}${id}/`);
   }
-  updateSubjectCompetence(id: number, subjectCompetence: SubjectCompetenceWrapper): Observable<SubjectCompetenceWrapper> {
+  
+  updateSubjectCompetence(
+    id: number,
+    compDescription: string,
+    compLevel: string,
+    programCompetence: number,
+    subjectTeacherPeriod: number
+  ): Observable<SubjectCompetenceWrapper> {
+    const body = {
+      compDescription,
+      compLevel,
+      programCompetence,
+      subjectTeacherPeriod
+    };
     const url = `${this.apiCompetencesUrl}${id}/`;
-    return this.httpClient.patch<SubjectCompetenceWrapper>(url, subjectCompetence);
+    return this.httpClient.patch<SubjectCompetenceWrapper>(url, body);
   }
 }

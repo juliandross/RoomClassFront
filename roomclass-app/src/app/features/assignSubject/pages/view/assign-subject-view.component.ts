@@ -10,7 +10,7 @@ import { EditSubjectCompetenceComponent } from '../../../assignCompetence/edit-c
 import { CompetenceProgramSubject } from '../../../../core/models/competence-program-subject';
 import { AddSubjectCompetenceComponent } from '../../../assignCompetence/add-competence/add-competence.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SubjectCompetence } from '../../../../core/models/subject';
+import { SubjectCompetence, SubjectCompetenceWrapper } from '../../../../core/models/subject';
 import { ProgramCompetence } from '../../../../core/models/ProgramCompetence';
 import { ProgramCompetenceService } from '../../../../core/services/ProgramCompetence.service';
 
@@ -143,34 +143,61 @@ export class AssignSubjectViewComponent {
       }
     }).catch(() => {});
   }
-  editCompetence(subjectCompetence: CompetenceProgramSubject) {
+  editCompetence(competenceWrapper: SubjectCompetenceWrapper) { 
+    console.log('CompetenceWrapper received in editCompetence:', competenceWrapper);
+
+    // Guard against null/undefined SubjectCompetence (though unlikely if mapped correctly)
+    if (!competenceWrapper || !competenceWrapper.SubjectCompetence) {
+      console.error('CompetenceWrapper or SubjectCompetence is undefined.');
+      Swal.fire('Error', 'Datos de competencia incompletos.', 'error');
+      return;
+    }
+
     const modalRef = this.modalService.open(EditSubjectCompetenceComponent, {
       size: 'lg',
       centered: true,
       backdrop: 'static'
     });
+
     modalRef.componentInstance.programCompetences = this.programCompetences;
-    modalRef.componentInstance.subjectCompetence = { ...subjectCompetence };
+
+    // Correctly pass the nested SubjectCompetence object to the modal
+    // Ensure the modal's @Input() expects SubjectCompetence
+    modalRef.componentInstance.subjectCompetence = {
+      ...competenceWrapper.SubjectCompetence, // <-- Extract the actual SubjectCompetence here
+      // Now, access programCompetence from the extracted SubjectCompetence
+      programCompetence: typeof competenceWrapper.SubjectCompetence.programCompetence === 'object' && competenceWrapper.SubjectCompetence.programCompetence !== null
+        ? (competenceWrapper.SubjectCompetence.programCompetence as { id: number }).id
+        : competenceWrapper.SubjectCompetence.programCompetence
+    };
 
     modalRef.result.then((result) => {
+      console.log('Result from modal after edit:', result);
       if (result) {
+        if(result.id === undefined || result.id === null) {
+          Swal.fire('Error', 'ID de competencia no válido devuelto por el modal.', 'error');
+          return;
+        }
         this.subjectCompetenceService.updateSubjectCompetence(
           result.id,
-          {
-            ...result,
-            subject: this.id ? +this.id : undefined
-          }
+          result.compDescription,
+          result.compLevel,
+          result.programCompetence,
+          this.id ? +this.id : 0
         ).subscribe({
           next: () => {
             Swal.fire('Competencia actualizada', 'La competencia fue actualizada con éxito', 'success')
               .then(() => this.ngOnInit());
           },
-          error: () => {
-            Swal.fire('Error', 'No se pudo actualizar la competencia', 'error');
+          error: (err) => {
+            console.error('Error updating competence:', err);
+            Swal.fire('Error', 'No se pudo actualizar la competencia.', 'error');
           }
         });
       }
-    }).catch(() => {});
+    }).catch((reason) => {
+      console.log('Modal dismissed or error:', reason);
+    });
   }
   deleteCompetence(subjectCompetence_id: number) {
     Swal.fire({
