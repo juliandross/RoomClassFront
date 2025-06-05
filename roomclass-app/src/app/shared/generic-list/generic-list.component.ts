@@ -15,7 +15,7 @@ export class GenericListComponent {
   @Input() items: any[] = [];
   @Input() showViewButton: boolean = true; // This input is used to control the visibility of the view button
   @Input() showEditButton: boolean = true; // This input is used to control the visibility of the edit button
-
+  @Input() isCoordinator: boolean = true; // This input is used to control the visibility of the add button for coordinators
   @Output() onView = new EventEmitter<any>(); // This output is used to emit the item to be viewed when the view button is clicked
   @Output() onEdit = new EventEmitter<any>(); // This output is used to emit the item to be edited when the edit button is clicked
   @Output() onDelete = new EventEmitter<any>(); // This output is used to emit the item to be deleted when the delete button is clicked

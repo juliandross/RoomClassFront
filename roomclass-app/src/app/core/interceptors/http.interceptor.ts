@@ -5,9 +5,11 @@ import {
   HttpHandler,
   HttpRequest,
   HTTP_INTERCEPTORS,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { StorageService } from '../services/storage-service.service';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -26,7 +28,19 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(authReq);
+    return next.handle(authReq).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Sesión expirada',
+            text: 'El usuario no se encuentra autenticado o expiró su token.',
+            confirmButtonText: 'OK'
+          });
+        }
+        return throwError(() => error);
+      })
+    );
   }
 }
 

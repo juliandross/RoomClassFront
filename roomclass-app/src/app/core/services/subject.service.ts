@@ -24,7 +24,7 @@ export class SubjectService {
   }
 
   deleteSubject(id: Number): Observable<void> {
-    return this.httpClient.patch<void>(`${this.apiUrl}${id}/`,{});
+    return this.httpClient.patch<void>(`${this.baseUrl}unactivateSubject/${id}/`,{});
   }
 
   viewSubject(id: Number): Observable<Subject> {
@@ -37,5 +37,5 @@ export class SubjectService {
 
   getSubjectById(id: number): Observable<Subject>{
      return this.httpClient.get<Subject>(`${this.apiUrl}${id}/`); 
-  }
+  }  
 }

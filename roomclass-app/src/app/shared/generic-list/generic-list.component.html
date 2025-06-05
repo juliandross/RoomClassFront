@@ -22,13 +22,13 @@
                 <button title="Editar {{name}}" class="btn btn-secondary me-2" (click)="onEdit.emit(item)" *ngIf="showEditButton">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button title="Eliminar {{name}}" class="btn btn-danger" (click)="onDelete.emit(item)">
+                <button title="Eliminar {{name}}" class="btn btn-danger" (click)="onDelete.emit(item)" *ngIf="isCoordinator">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>           
         </li>
     </ul>
-     <button name="Agregar {{name}}" class="btn btn-success add-btn" (click)="onAdd.emit()">
+     <button name="Agregar {{name}}" class="btn btn-success add-btn" (click)="onAdd.emit()" *ngIf="isCoordinator">
         <i class="fa-solid fa-plus"></i>
      </button>
     </div>

@@ -13,6 +13,8 @@ import { SubjectService } from '../../../../core/services/subject.service';
 import { Subject } from '../../../../core/models/subject';
 import { Teacher } from '../../../../core/models/teacher';
 import { Period } from '../../../../core/models/period';
+import { User } from '../../../../core/models/user';
+import { StorageService } from '../../../../core/services/storage-service.service';
 @Component({
   selector: 'app-assign-subject',
   standalone: true,
@@ -21,6 +23,7 @@ import { Period } from '../../../../core/models/period';
   styleUrl: './assign-subject.component.css'
 })
 export class AssignSubjectComponent {
+
 assignSubjects: AssignSubject[] = [];
 assignSubjectFull!: AssignSubject;
 subject!: Subject;
@@ -28,17 +31,36 @@ period!: Period;
 teacher!: Teacher;
 
 constructor(private assignSubjectService: AssignSubjectService,private router:Router, private modelService: NgbModal,
-  private teacherService: TeacherService, private periodService: PeriodService, private subjectService: SubjectService
-) { }
+  private teacherService: TeacherService, private periodService: PeriodService, private subjectService: SubjectService,
+  private storageService:StorageService) { }
+  user: User | null = null;
+  isCoordinador = false;
   ngOnInit() {
-    this.assignSubjectService.getAssignSubjects().subscribe({
+    this.user = this.storageService.getUser();
+    this.isCoordinador = !!this.user && (this.user.rol || '').trim().toUpperCase() === 'COORDINADOR';
+    if(this.isCoordinador){
+      this.assignSubjectService.getAssignSubjects().subscribe({
       next: (assignSubjects) => {
-        this.assignSubjects = assignSubjects;
+        this.assignSubjects = assignSubjects;        
       },
       error: (error) => {
         console.error('Error fetching subjects:', error);
       }
     })
+    }else{
+      this.assignSubjectService.getAssignSubjectsByUserId(this.user?.id || 0).subscribe({
+        next: (assignSubjects) => {
+          this.assignSubjects = assignSubjects;          
+        },
+        error: (error) => {
+          console.error('Error fetching subjects:', error);
+        }
+      })
+    }
+    
+  }
+  isCoordinator(): boolean {
+    return this.isCoordinador;
   }
   viewAssignSubject(assignSubject: AssignSubject) {
     this.router.navigate(['home/asignar_materia/view/', assignSubject.id]);

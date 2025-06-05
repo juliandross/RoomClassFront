@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout/layout.component';
 import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
     {
@@ -30,12 +31,14 @@ export const routes: Routes = [
             },
             { 
                 path: 'asignaturas', 
+                canActivate: [adminGuard],
                 loadChildren: () => import('./features/subjects/subject.routes').then(m => m.SubjectRoutes),
                 data: { breadcrumb: 'Asignaturas' }
             },                
             { 
                 path: 'docentes',
                 data: { breadcrumb: 'Docentes' },
+                canActivate: [adminGuard],
                 children: [
                     {
                         path: '',
@@ -59,7 +62,8 @@ export const routes: Routes = [
                     }
                 ]
             },
-            { path: 'programa', 
+            { path: 'programa',
+                canActivate: [adminGuard], 
                 loadComponent: () => import('./features/programa/programa.component').then(m => m.ProgramaComponent), 
                 data: { breadcrumb: 'Programa' }
             },
