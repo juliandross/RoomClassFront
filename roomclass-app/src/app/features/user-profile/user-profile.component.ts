@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../../core/models/user';
-import { AuthService } from '../../core/auth/auth.service';
 import { UserService } from '../../core/services/user.service';
 import Swal from 'sweetalert2';
 import { StorageService } from '../../core/services/storage-service.service';

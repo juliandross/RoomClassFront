@@ -10,8 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-program-competence-list',
   standalone: true,  
-  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent,    
-    CreateCompProgramaComponent], 
+  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent], 
      
   templateUrl: './programa.component.html',
 })
@@ -52,10 +51,12 @@ export class ProgramaComponent implements OnInit {
       if (result) {
         this.programCompetenceService.createProgramCompetence(result).subscribe({
           next: (created) => {
-            this.competences.push(this.competenceMapper.mapProgramCompetenceToCompetenceWrapper(created));
-            Swal.fire('Competencia creada', 'La competencia fue creada con éxito', 'success');
+            console.log('Competencia creada:', created);
+            Swal.fire('Competencia creada', 'La competencia fue creada con éxito', 'success')
+              .then(() => this.ngOnInit()); // Refresca después del Swal
           },
-          error: () => {
+          error: (err) => {
+            console.error('Error al crear competencia:', err);
             Swal.fire('Error', 'No se pudo crear la competencia', 'error');
           }
         });
