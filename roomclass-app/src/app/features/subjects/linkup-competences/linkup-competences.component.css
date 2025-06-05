@@ -18,8 +18,7 @@ button {
   transition: background 0.2s;
 }
 
-.modal-header {
-  background-color: #4e68c6;
+.modal-header {  
   color: white;
   text-align: center;
   padding: 1rem;

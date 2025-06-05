@@ -20,7 +20,7 @@ import { CompetenceProgramSubjectService } from '../../../core/services/competen
 })
 export class SubjectComponent {
   subjects: Subject[] = [];
-  constructor(private subjectService: SubjectService, private dialog: MatDialog, private router: Router, private modalService: NgbModal, private competenceProgramSubjectService: CompetenceProgramSubjectService ) { }
+  constructor(private subjectService: SubjectService, private router: Router, private modalService: NgbModal, private competenceProgramSubjectService: CompetenceProgramSubjectService ) { }
   ngOnInit() {
     this.subjectService.getSubjects().subscribe({
       next: (subjects) => {

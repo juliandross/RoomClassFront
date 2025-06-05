@@ -42,7 +42,7 @@ button {
 }
 
 .modal-header {
-  background-color: var(--primary-color);
+  background-color: #4e68c6;
   color: white;
   text-align: center;
   padding: 1rem;
@@ -109,7 +109,7 @@ button:disabled {
 }
 
 button.asociate {
-  background-color: var(--primary-color);
+  background-color: #4e68c6;
   color: white;
   border: none;
   justify-content: center;
