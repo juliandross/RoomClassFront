@@ -37,5 +37,5 @@ export class SubjectService {
 
   getSubjectById(id: number): Observable<Subject>{
      return this.httpClient.get<Subject>(`${this.apiUrl}${id}/`); 
-  }
+  }  
 }

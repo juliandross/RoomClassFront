@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProgramCompetence } from '../../../core/models/ProgramCompetence';
-import { CompetenceProgramSubject } from '../../../core/models/competence-program-subject';
+import { ProgramCompetence } from '../../../../../core/models/ProgramCompetence';
+import { CompetenceProgramSubject } from '../../../../../core/models/competence-program-subject';
 
 @Component({
   selector: 'app-edit-subject-competence',
@@ -24,6 +24,7 @@ export class EditSubjectCompetenceComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
+    console.log(this.subjectCompetence);
     this.selectedProgramCompetenceId = this.subjectCompetence.programCompetence;
     this.compDescription = (this.subjectCompetence as any).compDescription || '';
     this.compLevel = (this.subjectCompetence as any).compLevel || '';

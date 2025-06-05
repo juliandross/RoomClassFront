@@ -20,7 +20,7 @@
             </span>          
           </div>
           <div>
-            <button title="Editar competencia" class="btn btn-secondary me-2" (click)="onEditCompetence.emit(competenceWrapper.competence.id)">
+            <button title="Editar competencia" class="btn btn-secondary me-2" *ngIf="!assignSubjectView" (click)="onEditCompetence.emit(competenceWrapper.competence.id)">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
             <button title="Eliminar competencia" class="btn btn-danger" (click)="onDeleteCompetence.emit(competenceWrapper.competence.id)">
@@ -44,10 +44,7 @@
               <div>
                 <button title="Mostrar RA" class="btn btn-primary me-2" (click)="onViewRA.emit(ra.id)" *ngIf="!programView">
                     <i class="fa-solid fa-eye"></i>
-                </button>
-                <button title="Editar RA" class="btn btn-secondary me-2" (click)="onEditRA.emit(ra.id)">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </button>
+                </button>                
                 <button title="Eliminar RA" class="btn btn-danger" (click)="onDeleteRA.emit(ra.id)">
                   <i class="fa-solid fa-trash"></i>
                 </button>

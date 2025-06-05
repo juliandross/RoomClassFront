@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProgramCompetence } from '../../../core/models/ProgramCompetence';
+import { ProgramCompetence } from '../../../../../core/models/ProgramCompetence';
 
 @Component({
   selector: 'app-add-subject-competence',

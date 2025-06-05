@@ -18,6 +18,9 @@ body{
 .modal-header{
   background-color: var(--primary-color) !important;    
 }
+.modal-title{
+  color: white !important;
+}
 img {
   max-width: 100%;
   height: auto;
