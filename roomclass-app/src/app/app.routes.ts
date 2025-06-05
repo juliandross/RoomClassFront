@@ -39,7 +39,8 @@ export const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        loadComponent: () => import('./features/docentes/docentes.component').then(m => m.DocentesComponent)
+                        loadComponent: () => import('./features/docentes/docentes.component').then(m => m.DocentesComponent),
+                        data: { breadcrumb: null }
                     },
                     {
                         path: 'crear',

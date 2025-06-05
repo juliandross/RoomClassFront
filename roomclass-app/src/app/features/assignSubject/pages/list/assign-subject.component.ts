@@ -86,6 +86,7 @@ constructor(private assignSubjectService: AssignSubjectService,private router:Ro
             this.assignSubjects.push(assignSubject);
             console.log('Asignación creada:', assignSubject);
             Swal.fire('Nueva delegación de asignatura', `Asignatura delegada con éxito`, 'success');
+            //REFRESH
             this.ngOnInit();
           },
           error: (error) => {

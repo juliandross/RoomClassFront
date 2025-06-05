@@ -14,6 +14,7 @@ export class GenericListComponent {
   @Input() nameAtribute: string = ''; //This input is used to specify the attribute to display the item's name
   @Input() items: any[] = [];
   @Input() showViewButton: boolean = true; // This input is used to control the visibility of the view button
+  @Input() showEditButton: boolean = true; // This input is used to control the visibility of the edit button
 
   @Output() onView = new EventEmitter<any>(); // This output is used to emit the item to be viewed when the view button is clicked
   @Output() onEdit = new EventEmitter<any>(); // This output is used to emit the item to be edited when the edit button is clicked

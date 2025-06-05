@@ -39,4 +39,9 @@ export class AssignSubjectService {
   deleteAssignSubject(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrlPost}${id}/`);
   }
+  getRAById(raId: number): Observable<any> {
+    return this.httpClient.get<any>(`http://localhost:8001/AcademApi/subjectRA/${raId}/`);
+  }
 }
+
+
