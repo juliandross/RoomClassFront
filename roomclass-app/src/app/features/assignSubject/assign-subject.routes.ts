@@ -1,5 +1,4 @@
 import { Routes } from "@angular/router";
-import { AssignSubjectComponent } from "./pages/list/assign-subject.component";
 
 export const AssignSubjectRoutes: Routes = [
     {

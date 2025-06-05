@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import { SubjectService } from '../../core/services/subject.service';
-import { Subject } from '../../core/models/subject';
+import { SubjectService } from '../../../core/services/subject.service';
+import { Subject } from '../../../core/models/subject';
 import { CommonModule } from '@angular/common';
-import { GenericListComponent } from "../../shared/generic-list/generic-list.component";
-import { SubjectCreateDialogComponent } from './subject-create-dialog/subject-create-dialog.component';
+import { GenericListComponent } from "../../../shared/generic-list/generic-list.component";
+import { SubjectCreateDialogComponent } from '../subject-create-dialog/subject-create-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { SubjectUpdateDialogComponent } from './subject-update-dialog/subject-update-dialog.component';
+import { SubjectUpdateDialogComponent } from '../subject-update-dialog/subject-update-dialog.component';
 import Swal from 'sweetalert2';
-import { CompetenceProgramSubjectService } from '../../core/services/competence-program-subject.service';
+import { CompetenceProgramSubjectService } from '../../../core/services/competence-program-subject.service';
 
 @Component({
   selector: 'app-subject',
   standalone: true,
-  imports: [CommonModule, GenericListComponent],
-  providers: [SubjectService],
+  imports: [CommonModule, GenericListComponent],  
   templateUrl: './subject.component.html',
   styleUrl: './subject.component.css'
 })
@@ -34,7 +33,7 @@ export class SubjectComponent {
   } 
 
   viewSubject(subject: Subject) {
-    this.router.navigate(['/home/asignaturas', subject.id]);
+    this.router.navigate(['home/asignaturas/view/', subject.id]);
   }
 
   deleteSubject(subject: Subject) {

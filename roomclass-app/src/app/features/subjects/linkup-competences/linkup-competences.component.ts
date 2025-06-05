@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-linkup-competences',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule],  
   templateUrl: './linkup-competences.component.html',
   styleUrl: './linkup-competences.component.css'
 })

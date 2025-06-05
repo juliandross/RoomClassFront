@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SubjectService } from '../../../core/services/subject.service';
-import { Subject } from '../../../core/models/subject';
 import { GenericViewDetailsComponent } from "../../../shared/generic-view-details/generic-view-details.component";
+import { CompetenceWrapper } from '../../../core/services/competence-mapper.service';
 
 @Component({
   selector: 'app-subject-detail-view',
@@ -12,7 +12,8 @@ import { GenericViewDetailsComponent } from "../../../shared/generic-view-detail
 })
 export class SubjectDetailViewComponent implements OnInit {
 
-  subject: Subject | null = null;
+  subject: any;
+  competences: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +24,13 @@ export class SubjectDetailViewComponent implements OnInit {
     this.subjectService.viewSubject(id).subscribe({
       next: (subject) => {
         console.log('Subject recibido:', subject);
-        this.subject = subject;
+        this.subject = {
+          Id: subject.id,
+          Nombre: subject.subjectName,          
+          Descripción: subject.subjectDescription,
+          Semestre: subject.subjectSemester,
+          Creditos: subject.subjectCredits,                    
+        };
       }
     });
   }

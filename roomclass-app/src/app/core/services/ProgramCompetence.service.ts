@@ -10,6 +10,7 @@ export class ProgramCompetenceService {
   private deleteUrl = 'http://localhost:8001/AcademApi/programCompetence/';
   constructor(private http: HttpClient, private authService: AuthService) {}
   
+
   getProgramCompetences(): Observable<ProgramCompetenceRAResponse[]> {
     return this.http.get<ProgramCompetenceRAResponse[]>(this.apiRAAsociatedUrl);
   }
