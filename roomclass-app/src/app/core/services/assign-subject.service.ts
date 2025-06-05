@@ -42,6 +42,21 @@ export class AssignSubjectService {
   getRAById(raId: number): Observable<any> {
     return this.httpClient.get<any>(`http://localhost:8001/AcademApi/subjectRA/${raId}/`);
   }
+  getAssignSubjectsByUserId(userId: number): Observable<AssignSubject[]> {
+  return this.httpClient
+    .get<{SubjectTeacherPeriods: any[]}>(`http://localhost:8001/AcademApi/teacher/${userId}/SubjectTeacherPeriod_asociated/`)
+    .pipe(
+      map(response =>
+        response.SubjectTeacherPeriods.map(assignWrapper => {
+          const assign = assignWrapper.SubjectTeacherPeriod;
+          return {
+            ...assign,
+            displayName: `${assign.period.perSemester} - ${assign.subject.subjectName} - ${assign.teacher.first_name} ${assign.teacher.last_name}`
+          } as AssignSubject;
+        })
+      )
+    );
+}
 }
 
 
