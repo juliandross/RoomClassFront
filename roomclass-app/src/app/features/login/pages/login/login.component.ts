@@ -47,6 +47,7 @@ export class LoginComponent {
       }).then(() => {        
         this.authService.getProfile().subscribe({
           next:(user)=>{
+            console.log('User profile fetched successfully', user);
             this.storage.saveUser(user);
             this.router.navigate(['/home']);
           }

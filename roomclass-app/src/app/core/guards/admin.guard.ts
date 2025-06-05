@@ -5,6 +5,9 @@ import { inject } from '@angular/core';
 export const adminGuard: CanActivateFn = (route, state) => {
   const storageService = inject(StorageService);
   const router = inject(Router);
-  if(storageService.isCoordinador()) return true;  
+  if(storageService.isCoordinador()) {
+    console.log('User is a coordinator, access granted.');
+    return true;  
+  }
   return router.createUrlTree(['/home']);
 };
