@@ -14,7 +14,10 @@ export class ProgramRAService {
     getProgramRA(): Observable<RAProgram[]> {
         return this.http.get<any[]>(this.getProgramRAUrl);
     }
-
+    getProgramRAById(id: number): Observable<RAProgram> {
+        const url = `${this.getProgramRAUrl}${id}/`;
+        return this.http.get<RAProgram>(url);
+    }
     createProgramRA(programRA: RAProgram): Observable<any> {
         return this.http.post<any>(this.createUrl, programRA);
     }
