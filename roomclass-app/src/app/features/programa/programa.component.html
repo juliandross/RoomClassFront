@@ -1,10 +1,15 @@
-<app-generic-list
-  [name]="'Competencias de Programa'"
-  [nameAtribute]="'proCompDescription'"
-  [items]="competences"
-  [showViewButton]="true"
-  (onView)="viewCompetence($event)"
-  (onAdd)="addCompetence()"
-  (onEdit)="editCompetence($event)"
-  (onDelete)="deleteCompetence($event)">
-</app-generic-list>
+<app-generic-view-details
+  [item]="item"
+  [title]="'Detalles del Programa'" >
+</app-generic-view-details>
+<app-generic-view-competences
+  [competencesWrapper]="competences"
+  [programView]="true"
+  (onAddCompetence)="addCompetence()"
+  (onEditCompetence)="editCompetence($event)"
+  (onDeleteCompetence)="deleteCompetence($event)"
+  (onAddRA)="onAddRA($event)"
+  (onEditRA)="onEditRA($event)"
+  (onDeleteRA)="onDeleteRA($event)"
+  (onViewRA)="onViewRA($event)">
+</app-generic-view-competences>

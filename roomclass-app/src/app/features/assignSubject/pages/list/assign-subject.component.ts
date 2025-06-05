@@ -7,8 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-assign-subject',
   standalone: true,
-  imports: [GenericListComponent],
-  providers: [AssignSubjectService],
+  imports: [GenericListComponent],  
   templateUrl: './assign-subject.component.html',
   styleUrl: './assign-subject.component.css'
 })

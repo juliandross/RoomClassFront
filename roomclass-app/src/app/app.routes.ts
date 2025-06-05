@@ -18,17 +18,19 @@ export const routes: Routes = [
         canActivate: [authGuard],        
         data: { breadcrumb: 'Home' },
         children: [
-            { path: '', 
+            { 
+                path: '', 
                 loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) ,
                 data: { breadcrumb: null },
             },
-            {
-            path: 'perfil',
-            loadComponent: () => import('./features/user-profile/user-profile.component').then(m => m.UserProfileComponent),
-            data: { breadcrumb: 'Mi Perfil' }
+            {        
+                path: 'perfil',
+                loadComponent: () => import('./features/user-profile/user-profile.component').then(m => m.UserProfileComponent),
+                data: { breadcrumb: 'Mi Perfil' }
             },
-            { path: 'asignaturas', 
-                loadComponent: () => import('./features/subjects/subject.component').then(m => m.SubjectComponent), 
+            { 
+                path: 'asignaturas', 
+                loadChildren: () => import('./features/subjects/subject.routes').then(m => m.SubjectRoutes),
                 data: { breadcrumb: 'Asignaturas' }
             },                
             { 

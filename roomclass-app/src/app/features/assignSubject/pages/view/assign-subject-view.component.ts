@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
 import { GenericViewDetailsComponent } from "../../../../shared/generic-view-details/generic-view-details.component";
-import { AssignSubject } from '../../../../core/models/assign-subject';
-import { SubjectCompetence } from '../../../../core/models/subject-competence';
 import { AssignSubjectService } from '../../../../core/services/assign-subject.service';
 import { SubjectCompetenceService } from '../../../../core/services/subject-competence.service';
 import { ActivatedRoute } from '@angular/router';
-import { SubjectCompetenceWrapper } from '../../../../core/models/subject-competence-wrapper';
+import { GenericViewCompetencesComponent } from "../../../../shared/generic-view-competences/generic-view-competences/generic-view-competences.component";
+import { CompetenceMapperService, CompetenceWrapper } from '../../../../core/services/competence-mapper.service';
+
 
 @Component({
   selector: 'app-assign-subject-view',
   standalone: true,
-  imports: [GenericViewDetailsComponent],
-  providers: [AssignSubjectService, SubjectCompetenceService],
+  imports: [GenericViewDetailsComponent, GenericViewCompetencesComponent],
   templateUrl: './assign-subject-view.component.html',
   styleUrl: './assign-subject-view.component.css'
 })
 export class AssignSubjectViewComponent {  
-  competences: SubjectCompetenceWrapper[] = [];
+  competences: CompetenceWrapper[] = [];
   item: any;
   constructor(
     private assignSubjectService:AssignSubjectService,
     private subjectCompetenceService: SubjectCompetenceService,
+    private competenceMapper: CompetenceMapperService,
     private route: ActivatedRoute) { }
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -37,8 +37,10 @@ export class AssignSubjectViewComponent {
           }
           this.subjectCompetenceService.getCompetencesBySubjectId(assignSubject.subject.id).subscribe({
             next: (competences) => {
-              this.competences = competences;
-                console.log(competences);
+              // Map the competences to the CompetenceWrapper format
+              this.competences = competences.map(competence => {
+                return this.competenceMapper.mapSubjectCompetenceToCompetenceWrapper(competence);
+              })
             },
             error: (error) => {
               console.error('Error fetching competences:', error);

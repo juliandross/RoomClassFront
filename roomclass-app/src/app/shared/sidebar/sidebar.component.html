@@ -1,5 +1,5 @@
 <div class="siderbar-container w-100 px-3 py-2">
-    <div class="user-info d-flex flex-column align-items-center my-5">
+    <div class="user-info d-flex flex-column align-items-center mt-5 mb-4">
         <h2>RoomClass</h2>
         <i class="fa-solid fa-circle-user fa-2x"></i>
         <div class="mt-3 d-flex align-items-center">
@@ -11,19 +11,14 @@
                         <button class="dropdown-item" type="button" (click)="goToUserManagement()">
                             <i class="fa-solid fa-user-gear me-2 fa-sm"></i>Gestionar usuario
                         </button>
-                    </li>
-                    <li>
-                        <button class="dropdown-item" type="button" (click)="logout()">
-                            <i class="fa-solid fa-right-from-bracket me-2 fa-sm"></i>Cerrar sesión
-                        </button>
-                    </li>
+                    </li>                    
                 </ul>
             </div>
         </div>
         <h4>{{user?.rol}}</h4>
     </div>
     <div class="links d-flex flex-column align-items-start border-top py-3 px-3">
-        <a class="link nav-item mb-2" [routerLink]="'/home/programa'" routerLinkActive="active">
+        <a *ngIf="isCoordinador" class="link nav-item mb-2" [routerLink]="'/home/programa'" routerLinkActive="active">
             <i class="fa-solid fa-graduation-cap fa-sm"></i>
             <span>Programa</span>
         </a>
@@ -31,7 +26,7 @@
             <i class="fa-solid fa-file-lines fa-sm"></i>
             <span>Asignaturas</span>
         </a>
-        <a class="link nav-item mb-2" [routerLink]="'/home/docentes'" routerLinkActive="active">
+        <a class="link nav-item mb-2" *ngIf="isCoordinador" [routerLink]="'/home/docentes'" routerLinkActive="active">
             <i class="fa-solid fa-chalkboard-user fa-sm"></i>
             <span>Docentes</span>
         </a>
