@@ -8,6 +8,11 @@ import { CompetenceMapperService } from '../../core/services/competence-mapper.s
 import { CreateCompProgramaComponent } from './create-comp-programa/create-comp-programa.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditCompProgramaComponent } from './edit-comp-programa/edit-comp-programa.component';
+import { ProgramRAService } from '../../core/services/ProgramRA.service';
+import { AddRaComponent } from './add-ra/add-ra.component';
+import { EditRaComponent } from './edit-ra/edit-ra.component';
+import { ViewRaComponent } from './view-ra/view-ra.component';
+import { RAProgram } from '../../core/models/RAProgram';
 @Component({
   selector: 'app-program-competence-list',
   standalone: true,  
@@ -19,6 +24,7 @@ export class ProgramaComponent implements OnInit {
   competences: any[] = [];
   item: any;
   constructor(private programCompetenceService: ProgramCompetenceService,
+    private ProgramRAService: ProgramRAService,
     private competenceMapper:CompetenceMapperService,
     private modalService: NgbModal) {}
 
@@ -95,28 +101,104 @@ export class ProgramaComponent implements OnInit {
       }
     }).catch(() => {});
   }
-  viewCompetence(competence: any) {
-    // Aquí puedes mostrar un modal, navegar a detalles, etc.
-    console.log('Competencia seleccionada:', competence);
-    // Por ejemplo, puedes mostrar las RA asociadas:
-    // competence.RA_Program
-  }
 
   onAddRA(competenceId: number) {
-    // Lógica para crear RA
+    const modalRef = this.modalService.open(AddRaComponent, {
+      size: 'lg',
+      centered: true,
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.competenceId = competenceId;
+
+    modalRef.result.then((result) => {
+      if (result) {
+        this.ProgramRAService.createProgramRA(result).subscribe({
+          next: () => {
+            Swal.fire('RA creada', 'La RA fue creada con éxito', 'success')
+              .then(() => this.ngOnInit());
+          },
+          error: () => {
+            Swal.fire('Error', 'No se pudo crear la RA', 'error');
+          }
+        });
+      }
+    }).catch(() => {});
   }
 
   onEditRA(raId: number) {
-    // Lógica para editar RA
-  }
+    // Buscar el objeto RA en el array de competencias
+    let raObj: RAProgram | undefined;
+    for (const comp of this.competences) {
+      raObj = comp.ras.find((ra: RAProgram) => ra.id === raId);
+      if (raObj) break;
+    }
+    if (!raObj) {
+      Swal.fire('Error', 'No se encontró la RA', 'error');
+      return;
+    }
+    const modalRef = this.modalService.open(EditRaComponent, {
+      size: 'lg',
+      centered: true,
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.ra = { ...raObj };
 
-  onDeleteRA(raId: number) {
-    // Lógica para eliminar RA
+    modalRef.result.then((result) => {
+      if (result) {
+        this.ProgramRAService.updateProgramRA(result.id, result).subscribe({
+          next: () => {
+            Swal.fire('RA actualizada', 'La RA fue actualizada con éxito', 'success')
+              .then(() => this.ngOnInit());
+          },
+          error: () => {
+            Swal.fire('Error', 'No se pudo actualizar la RA', 'error');
+          }
+        });
+      }
+    }).catch(() => {});
   }
 
   onViewRA(raId: number) {
-    // Lógica para mostrar RA
+    let raObj: RAProgram | undefined;
+    for (const comp of this.competences) {
+      raObj = comp.ras.find((ra: RAProgram) => ra.id === raId);
+      if (raObj) break;
+    }
+    if (!raObj) {
+      Swal.fire('Error', 'No se encontró la RA', 'error');
+      return;
+    }
+    const modalRef = this.modalService.open(ViewRaComponent, {
+      size: 'md',
+      centered: true,
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.ra = raObj;
   }
+
+  onDeleteRA(raId: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Deseas eliminar esta RA del programa?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ProgramRAService.deleteProgramRA(raId).subscribe({
+          next: () => {
+            Swal.fire('Eliminado', 'La RA ha sido eliminada.', 'success');
+            this.ngOnInit(); // Refresca la lista
+          },
+          error: (err) => {
+            Swal.fire('Error', 'No se pudo eliminar la RA - La RA no existe.', 'error');
+          }
+        });
+      }
+    })
+  }
+
   deleteCompetence(competenceId: number) {
     console.log('Eliminar competencia con ID:', competenceId);
     Swal.fire({
