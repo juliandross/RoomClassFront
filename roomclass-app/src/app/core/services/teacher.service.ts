@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Teacher, TeacherInfo, TeacherShowable } from '../models/teacher';
-import { AuthService } from '../auth/auth.service';
-
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
   private ListApiUrl = 'http://localhost:8001/AcademApi/avaliableTeachers/';
@@ -12,7 +10,7 @@ export class TeacherService {
   private UnactivateApiUrl = 'http://localhost:8001/AcademApi/unactivateTeacher/';
   private ViewApiUrl = 'http://localhost:8001/AcademApi/teacher/';
   private patchApiUrl = 'http://localhost:8001/AcademApi/patchTeacher/';
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
 
   getTeachers(): Observable<Teacher[]> {
