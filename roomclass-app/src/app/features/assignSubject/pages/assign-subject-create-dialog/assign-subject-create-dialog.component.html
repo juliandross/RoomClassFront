@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h3 class="modal-title">Delegar asignatura</h3>
+</div>
+
+<div class="modal-body">
+  <form #assignSubjectForm="ngForm">
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Asignatura</label>
+            <select name="selectedSubject" [(ngModel)]="selectedSubjectId" required>
+            <option [ngValue]="undefined" disabled selected>Seleccione una asignatura</option>
+            <option *ngFor="let subject of subjects" [ngValue]="subject.id">{{ subject.subjectName }}</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label>Periodo semestral</label>
+            <select name="selectedPeriod" [(ngModel)]="selectedPeriodId" required>
+              <option [ngValue]="undefined" disabled selected>Seleccione un periodo</option>
+              <option *ngFor="let period of periods" [ngValue]="period.id">{{ period.perSemester }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-grid">      
+      <div class="form-group">
+        <label>Profesor</label>
+        <select name="selectedTeacher" [(ngModel)]="selectedTeacherId" required>
+          <option [ngValue]="undefined" disabled selected>Seleccione un profesor</option>
+          <option *ngFor="let teacher of teachers" [ngValue]="teacher.id">{{ teacher.first_name }} {{teacher.last_name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="cancel" (click)="onCancel()">Cancelar</button>
+      <button type="button" class="assign" [disabled]="!assignSubjectForm.form.valid" (click)="onAssign()">Asignar</button>
+    </div>
+  </form>
+</div>
+

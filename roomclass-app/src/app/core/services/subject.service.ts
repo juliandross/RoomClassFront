@@ -34,4 +34,8 @@ export class SubjectService {
   editSubject(id: Number, subject: Subject): Observable<Subject> {
     return this.httpClient.put<Subject>(`${this.apiUrl}${id}/`, subject);
   }
+
+  getSubjectById(id: number): Observable<Subject>{
+     return this.httpClient.get<Subject>(`${this.apiUrl}${id}/`); 
+  }
 }
