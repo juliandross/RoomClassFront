@@ -53,9 +53,10 @@ export class AssignSubjectService {
       map(response =>
         response.SubjectTeacherPeriods.map(assignWrapper => {
           const assign = assignWrapper.SubjectTeacherPeriod;
+          console.log(assign);
           return {
             ...assign,
-            displayName: `${assign.period.perSemester} - ${assign.subject.subjectName} - ${assign.teacher.first_name} ${assign.teacher.last_name}`
+            displayName: `${assign.period_detail.perSemester} - ${assign.subject_detail.subjectName} - ${assign.teacher_detail.first_name} ${assign.teacher_detail.last_name}`
           } as AssignSubject;
         })
       )

@@ -32,8 +32,7 @@ export class StorageService {
   public getUser(): any {
     if (typeof window !== 'undefined' && window.sessionStorage) {
       const user = window.sessionStorage.getItem(USER_KEY);
-      if (user) {
-        console.log("Retrieved user:", user);
+      if (user) {        
         return JSON.parse(user);
       }
     }
@@ -58,8 +57,7 @@ export class StorageService {
     return !!this.getToken(); // Si hay token, el usuario está "autenticado"
   }
   public isCoordinador(): boolean {
-    const user = this.getUser();
-    console.log('User role:', user ? user.rol : 'No user found');
+    const user = this.getUser();    
     return user && user.rol === 'COORDINADOR'; // Verifica si el rol del usuario es 'coordinador'
   }
 }

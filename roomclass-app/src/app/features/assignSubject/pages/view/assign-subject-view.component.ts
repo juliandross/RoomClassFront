@@ -59,15 +59,13 @@ export class AssignSubjectViewComponent {
             Semestre: assignSubject.subject.subjectSemester,
             Profesor: assignSubject.teacher.first_name + ' ' + assignSubject.teacher.last_name,
             Periodo: assignSubject.period.perSemester,
-          }
-          this.subjectCompetenceService.getCompetencesBySubjectId(assignSubject.subject.id).subscribe({
+          }          
+          this.subjectCompetenceService.getCompetencesBySubjectId(assignSubject.id).subscribe({
             next: (competences) => {
               // Map the competences to the CompetenceWrapper format
-              this.competences = competences.map(competence => {
-                console.log('Competences for view:', this.competences);
+              this.competences = competences.map(competence => {                
                 return this.competenceMapper.mapSubjectCompetenceToCompetenceWrapper(competence);
-              })
-              console.log('Competences for view:', this.competences);
+              })              
             },
             error: (error) => {
               console.error('Error fetching competences:', error);

@@ -15,7 +15,7 @@ export class AddSubjectCompetenceComponent {
   @Input() programCompetences: ProgramCompetence[] = [];
   selectedProgramCompetenceId: number | null = null;
   compDescription: string = '';
-  compLevel: string = '';
+  compLevel: string | null = null;
   competenceLevels: string[] = ['Básico', 'Intermedio', 'Avanzado'];
   constructor(public activeModal: NgbActiveModal) {}
   
